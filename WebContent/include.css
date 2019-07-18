@@ -1,0 +1,31 @@
+@CHARSET "UTF-8";
+
+h1.title {
+	padding: 0.4em 0.5em; /*文字の上下 左右の余白*/
+	color: #494949; /*文字色*/
+	background: #f4f4f4; /*背景色*/
+	border-left: solid 5px #7db4e6; /*左線*/
+	border-bottom: solid 3px #d7d7d7; /*下線*/
+}
+
+a.top {
+	font-weight: bold; /*太字に*/
+	text-decoration: none; /*下線消す*/
+	background: #7db4e6; /*背景を水色に*/
+	color: white; /*文字を白に*/
+	padding: 5px 10px; /*内側の余白*/
+	border-radius: 20px; /*角を丸くする*/
+	font-family: 'Avenir', 'Arial'; /*フォントをいい感じに*/
+}
+
+a.top:hover {
+	background: silver; /*背景色をシルバーに*/
+	text-decoration: none; /*下線を消す*/
+}
+
+footer {
+	width: 100%;
+	background-color: #7db4e6;
+	color: #fff;
+	text-align: center;
+}
