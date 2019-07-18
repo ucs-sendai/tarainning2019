@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import jp.ucs.logic.LoginLogic;
 import model.LoginLogicloginCheck;
 
 /**
@@ -35,8 +37,8 @@ public class EntryMenuServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		String employeeId = request,get("employeeId");
-		String pass = request,get("pass");
+		String employeeId = request.getParameter("employeeId");
+		String pass = request.getParameter("pass");
 
 		String forwardPath = null;
 		LoginLogic login = new LoginLogic();
