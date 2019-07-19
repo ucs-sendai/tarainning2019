@@ -17,12 +17,9 @@ public class DeptFindAllLogicTest {
 	@Test
 	//部門が登録されている場合（データが取得できる場合）
 	public void deptest1() throws HrsmUcsDBException {
-		DeptFindAllLogic deptFindAllLogic = new DeptFindAllLogic();
 		DeptDAO deptDAO = new DeptDAO();
-		HttpServletRequest request = null;
-		HttpSession session = request.getSession();
-		EmployeeBean afterEmp =(EmployeeBean)session.getAttribute("afterEmp");
-		assertEquals(deptDAO.deptFindAll(),deptDAO.deptFindAll());
+		DeptFindAllLogic deptFindAllLogic = new DeptFindAllLogic();
+		assertEquals(deptFindAllLogic.deptExecute(),deptDAO.deptFindAll());
 
 	}
 

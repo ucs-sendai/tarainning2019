@@ -21,7 +21,7 @@ public class ChangeLogicTest {
 	@Test
 	public void testExecute1() throws HrsmUcsDBException{
 		ChangeLogic chaLogic = new ChangeLogic();
-		EmployeeBean employeebean = new EmployeeBean();
+		EmployeeBean employeebean = new EmployeeBean();//値を代入する
 		EmpUpdateDAO empupdatedao = new EmpUpdateDAO();
 		assertEquals(chaLogic.execute(employeebean),empupdatedao.empUpdate(employeebean));
 	}
@@ -35,7 +35,7 @@ public class ChangeLogicTest {
 		HttpServletRequest request = null;
 		HttpSession session = request.getSession();
 		EmployeeBean afterEmp =(EmployeeBean)session.getAttribute("afterEmp");
-		assertNotEquals(chaLogic.execute(employeebean),empupdatedao.empUpdate(afterEmp));
+		assertNotEquals(chaLogic.execute(employeebean),empupdatedao.empUpdate(employeebean));
 	}
 
 	//データベースに入力されていない
