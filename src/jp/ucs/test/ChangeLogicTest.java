@@ -19,7 +19,7 @@ public class ChangeLogicTest {
 		@Test
 		public void testExecute1() throws HrsmUcsDBException{
 			ChangeLogic chaLogic = new ChangeLogic();
-			EmployeeBean employeebean = new EmployeeBean("0018","小西香菜子");
+			EmployeeBean employeebean = new EmployeeBean("0018","1222");
 			EmpUpdateDAO empupdatedao = new EmpUpdateDAO();
 			assertEquals(chaLogic.changeExecute(employeebean),empupdatedao.empUpdate(employeebean));
 		}
