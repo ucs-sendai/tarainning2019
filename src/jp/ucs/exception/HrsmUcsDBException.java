@@ -6,6 +6,7 @@
 作成者    ：スピェッウォン
 作成日付  ：2019/06/25(火)
  */
+
 package jp.ucs.exception;
 
 public class HrsmUcsDBException extends Exception {
