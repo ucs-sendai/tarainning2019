@@ -29,7 +29,7 @@ public class ChangeLogic {
 	 * @return empUpdateDAO.empUpdate()
 	 */
 
-	public boolean execute(EmployeeBean afterEmp)
+	public boolean changeExecute(EmployeeBean afterEmp)
 			throws HrsmUcsDBException{
 		EmpUpdateDAO empUpdateDAO =new EmpUpdateDAO();
 		return empUpdateDAO.empUpdate(afterEmp);

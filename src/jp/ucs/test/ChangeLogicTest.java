@@ -21,35 +21,36 @@ public class ChangeLogicTest {
 			ChangeLogic chaLogic = new ChangeLogic();
 			EmployeeBean employeebean = new EmployeeBean("0018","小西香菜子");
 			EmpUpdateDAO empupdatedao = new EmpUpdateDAO();
-			assertEquals(chaLogic.execute(employeebean),empupdatedao.empUpdate(employeebean));
+			assertEquals(chaLogic.changeExecute(employeebean),empupdatedao.empUpdate(employeebean));
 		}
 
 		//データベースが更新されない
 		@Test
 		public void testExecute2() throws HrsmUcsDBException {
 			ChangeLogic chaLogic = new ChangeLogic();
-			EmployeeBean employeebean = new EmployeeBean();
+			EmployeeBean employeebean = new EmployeeBean(null,null);
 			EmpUpdateDAO empupdatedao = new EmpUpdateDAO();
-			assertNotEquals(chaLogic.execute(employeebean),empupdatedao.empUpdate(employeebean));
+			assertNotEquals(chaLogic.changeExecute(employeebean),empupdatedao.empUpdate(employeebean));
 		}
 
 		//データベースに入力されていない
 		@Test
 		public void testExecute3() throws HrsmUcsDBException {
 			ChangeLogic chaLogic = new ChangeLogic();
-			EmployeeBean employeebean = new EmployeeBean();
+			EmployeeBean employeebean = new EmployeeBean(null,null);
 			EmpUpdateDAO empupdatedao = new EmpUpdateDAO();
-			assertNotEquals(chaLogic.execute(employeebean),empupdatedao.empUpdate(employeebean));
+			assertNotEquals(chaLogic.changeExecute(employeebean),empupdatedao.empUpdate(employeebean));
 		}
-
-
-
 
 		//エラーメッセージが返される
 		@Test
 		public void testErrorCheck4(){
-			Map<String, String> errorMsgMap = new HashMap<>();
-			assertEquals(errorMsgMap,errorMsgMap);
+			ChangeLogic chaLogic = new ChangeLogic();
+			EmployeeBean beforeEmp = new EmployeeBean("0018","1222");
+			EmployeeBean afterEmp = new EmployeeBean("0028","1555");
+			chaLogic.errorCheck(beforeEmp, afterEmp);
+			assertNotEquals(beforeEmp,afterEmp);
+
 		}
 
 

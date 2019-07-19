@@ -21,7 +21,7 @@ public class DeptFindAllLogicTest {
 	//部門が登録されていない場合（データが取得できない場合）
 	public void deptest2() throws HrsmUcsDBException{
 		DeptDAO deptDAO = new DeptDAO();
-		assertNotEquals(deptDAO.deptFindAll(),deptDAO.deptFindAll());
+		assertTrue(deptDAO.deptFindAll());
     }
 
 }
