@@ -17,6 +17,7 @@ import jp.ucs.exception.HrsmUcsDBException;
 public class DeptFindAllLogic {
 		public Map<String, String> deptExecute() throws HrsmUcsDBException{
 	        DeptDAO deptDAO = new DeptDAO();
+
 	        return deptDAO.deptFindAll();
 	    }
 	}
