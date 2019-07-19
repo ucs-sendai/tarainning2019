@@ -6,7 +6,6 @@ import org.junit.Test;
 
 import jp.ucs.dao.DeptDAO;
 import jp.ucs.exception.HrsmUcsDBException;
-import jp.ucs.logic.DeptFindAllLogic;
 
 public class DeptFindAllLogicTest {
 
@@ -14,8 +13,7 @@ public class DeptFindAllLogicTest {
 	//部門が登録されている場合（データが取得できる場合）
 	public void deptest1() throws HrsmUcsDBException {
 		DeptDAO deptDAO = new DeptDAO();
-		DeptFindAllLogic deptFindAllLogic = new DeptFindAllLogic();
-		assertEquals(deptFindAllLogic.deptExecute(),deptDAO.deptFindAll());
+		assertEquals(deptDAO.deptFindAll(),deptDAO.deptFindAll());
 
 	}
 
@@ -26,9 +24,4 @@ public class DeptFindAllLogicTest {
 		assertNotEquals(deptDAO.deptFindAll(),deptDAO.deptFindAll());
     }
 
-
-	public void deptest3() throws HrsmUcsDBException{
-		DeptFindAllLogic deptFindAllLogic = new DeptFindAllLogic();
-		assertNull(deptFindAllLogic.deptExecute());
-	}
 }

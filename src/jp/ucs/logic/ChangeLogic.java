@@ -93,7 +93,6 @@ public class ChangeLogic {
 				errorMsgMap.put("pass", message);
 				afterEmp.setPass(beforeEmp.getPass());
 				return errorMsgMap;
-
 			}
 
 			if(afterEmp.getPass().length()<8 || afterEmp.getPass().length()>16){
@@ -101,7 +100,6 @@ public class ChangeLogic {
 				errorMsgMap.put("pass", message);
 				afterEmp.setPass(beforeEmp.getPass());
 				return errorMsgMap;
-
 			}
 
 			//部門の不備
@@ -110,7 +108,6 @@ public class ChangeLogic {
 				errorMsgMap.put("dept", message);
 				afterEmp.setDept(beforeEmp.getDept());
 				return errorMsgMap;
-
 			}
 
 			if(afterEmp.getEntryDate() == null || afterEmp.getEntryDate().length() == 0){
@@ -118,7 +115,6 @@ public class ChangeLogic {
 				errorMsgMap.put("entrydate", message);
 				afterEmp.setEntryDate(beforeEmp.getEntryDate());
 				return errorMsgMap;
-
 			}
 
 			//入社年月日の不備
@@ -127,7 +123,6 @@ public class ChangeLogic {
 				errorMsgMap.put("entrydate", message);
 				afterEmp.setEntryDate(beforeEmp.getEntryDate());
 				return errorMsgMap;
-
 			}
 
 			//入社年月日を取得
@@ -137,10 +132,7 @@ public class ChangeLogic {
 				DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
 				df.setLenient(false);
 				df.parse(afterEmp.getEntryDate());
-
-
 			} catch(ParseException e) {
-
 				message = MessageConstants.REGEMP_ERR11;
 				errorMsgMap.put("date", message);
 				afterEmp.setEntryDate(beforeEmp.getEntryDate());
