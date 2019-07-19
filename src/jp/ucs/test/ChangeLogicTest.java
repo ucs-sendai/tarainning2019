@@ -2,6 +2,9 @@ package jp.ucs.test;
 
 import static org.junit.Assert.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -29,7 +32,10 @@ public class ChangeLogicTest {
 		ChangeLogic chaLogic = new ChangeLogic();
 		EmployeeBean employeebean = new EmployeeBean();
 		EmpUpdateDAO empupdatedao = new EmpUpdateDAO();
-		assertNotEquals(chaLogic.execute(employeebean),empupdatedao.empUpdate(employeebean));
+		HttpServletRequest request = null;
+		HttpSession session = request.getSession();
+		EmployeeBean afterEmp =(EmployeeBean)session.getAttribute("afterEmp");
+		assertNotEquals(chaLogic.execute(employeebean),empupdatedao.empUpdate(afterEmp));
 	}
 
 	//データベースに入力されていない
@@ -40,6 +46,7 @@ public class ChangeLogicTest {
 		EmpUpdateDAO empupdatedao = new EmpUpdateDAO();
 		assertNotEquals(chaLogic.execute(employeebean),empupdatedao.empUpdate(employeebean));
 	}
+
 
 	//正常に入力されている
 	@Test
@@ -54,7 +61,7 @@ public class ChangeLogicTest {
 
 	}
 
-	//入力項目に誤りがある
+	//入力項目に誤りがある(異常）
 	@Test
 	public void testErrorCheck2() {
 		ChangeLogic chaLogic = new ChangeLogic();
@@ -66,7 +73,7 @@ public class ChangeLogicTest {
 		assertNull(chaLogic.errorCheck(employee, afterEmp));
 	}
 
-	//入力されていない
+	//入力されていない（異常）
 	@Test
 	public void testErrorCheck3(){
 		ChangeLogic chaLogic = new ChangeLogic();
@@ -77,4 +84,18 @@ public class ChangeLogicTest {
 		assertNull(chaLogic.errorCheck(employee, afterEmp));
 	}
 
+	//エラーメッセージが返される
+	@Test
+	public void testErrorCheck4(){
+		Map<String, String> errorMsgMap = new HashMap<>();
+		assertEquals(errorMsgMap,errorMsgMap);
+	}
+
+
+	//エラーメッセージが返される
+	@Test
+	public void testErrorCheck5(){
+		Map<String, String> errorMsgMap = new HashMap<>();
+		assertNotEquals(errorMsgMap,errorMsgMap);
+	}
 }

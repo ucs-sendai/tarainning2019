@@ -15,7 +15,7 @@ import jp.ucs.logic.DeptFindAllLogic;
 public class DeptFindAllLogicTest {
 
 	@Test
-	//部門が登録されている場合
+	//部門が登録されている場合（データが取得できる場合）
 	public void deptest1() throws HrsmUcsDBException {
 		DeptFindAllLogic deptFindAllLogic = new DeptFindAllLogic();
 		DeptDAO deptDAO = new DeptDAO();
@@ -23,11 +23,11 @@ public class DeptFindAllLogicTest {
 		HttpSession session = request.getSession();
 		EmployeeBean afterEmp =(EmployeeBean)session.getAttribute("afterEmp");
 		assertEquals(deptDAO.deptFindAll(),deptDAO.deptFindAll());
-		assertEquals(deptFindAllLogic.deptExecute(),afterEmp);
+
 	}
 
 	@Test
-	//部門が登録されていない場合
+	//部門が登録されていない場合（データが取得できない場合）
 	public void deptest2() throws HrsmUcsDBException{
 		DeptFindAllLogic deptFindAllLogic = new DeptFindAllLogic();
 		DeptDAO deptDAO = new DeptDAO();
@@ -38,8 +38,7 @@ public class DeptFindAllLogicTest {
 		assertNotEquals(deptFindAllLogic.deptExecute(),afterEmp);
     }
 
-	@Test
-	//入力されていない場合
+
 	public void deptest3() throws HrsmUcsDBException{
 		DeptFindAllLogic deptFindAllLogic = new DeptFindAllLogic();
 		assertNull(deptFindAllLogic.deptExecute());

@@ -27,7 +27,6 @@ public class ChangeLogic {
 	 * 説明:データベースの更新を行う。
 	 * @param: afterEmp
 	 * @return empUpdateDAO.empUpdate()
-	 *
 	 */
 
 	public boolean execute(EmployeeBean employeebean)
@@ -51,7 +50,9 @@ public class ChangeLogic {
 		int len = afterEmp.getEmpName().length();
 		byte[] bytes = afterEmp.getEmpName().getBytes();
 
+		//入力項目の不備を処理（エラーメッセージ表示）
 
+		//名前の不備
 		if(afterEmp.getEmpName() == null || afterEmp.getEmpName().length() == 0){
 
 			message = MessageConstants.REGEMP_ERR01;
@@ -69,6 +70,7 @@ public class ChangeLogic {
 				return errorMsgMap;
 			}
 
+			//ふりがなの不備
 			if(afterEmp.getRuby() == null || afterEmp.getRuby().length() == 0){
 				message = MessageConstants.REGEMP_ERR02;
 				errorMsgMap.put("ruby", message);
@@ -85,6 +87,7 @@ public class ChangeLogic {
 
 			}
 
+			//パスワードの不備
 			if(afterEmp.getPass() == null || afterEmp.getPass().length() == 0){
 				message = MessageConstants.REGEMP_ERR04;
 				errorMsgMap.put("pass", message);
@@ -101,6 +104,7 @@ public class ChangeLogic {
 
 			}
 
+			//部門の不備
 			if(afterEmp.getDept() == null){
 				message = MessageConstants.REGEMP_ERR03;
 				errorMsgMap.put("dept", message);
@@ -117,6 +121,7 @@ public class ChangeLogic {
 
 			}
 
+			//入社年月日の不備
 			if(afterEmp.getEntryDate().length() != 10){
 				message =MessageConstants.REGEMP_ERR09;
 				errorMsgMap.put("entrydate", message);
@@ -124,6 +129,9 @@ public class ChangeLogic {
 				return errorMsgMap;
 
 			}
+
+			//入社年月日を取得
+
 			try {
 
 				DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
