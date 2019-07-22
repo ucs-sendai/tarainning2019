@@ -42,8 +42,7 @@ public class ChangeLogicTest{
 		EmployeeBean beforeEmp = new EmployeeBean("00192818","M0e7S2k5");
 		EmployeeBean afterEmp = new EmployeeBean("08","M0");
 		ChangeLogic chaLogic = new ChangeLogic();
-		assertSame(afterEmp,chaLogic.errorCheck(beforeEmp, afterEmp));
-		assertNotSame(beforeEmp,afterEmp);
+		assertNotEquals(afterEmp,chaLogic.errorCheck(beforeEmp, afterEmp));
 	}
 }
 
