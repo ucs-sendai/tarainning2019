@@ -23,7 +23,7 @@ import jp.ucs.exception.HrsmUcsDBException;
 public class ChangeLogic {
 
 	/**
-	 * メソッド名:execute
+	 * メソッド名:changeExecute
 	 * 説明:データベースの更新を行う。
 	 * @param: afterEmp
 	 * @return empUpdateDAO.empUpdate()

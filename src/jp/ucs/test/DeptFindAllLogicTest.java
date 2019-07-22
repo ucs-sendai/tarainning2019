@@ -13,6 +13,7 @@ public class DeptFindAllLogicTest {
 	@Test
 	//部門が登録されている場合（データが取得できる場合）
 	public void deptest1() throws HrsmUcsDBException {
+		DeptFindAllLogic deptFindAllLogic = new DeptFindAllLogic();
 		DeptDAO deptDAO = new DeptDAO();
 		assertEquals(deptDAO.deptFindAll(),deptDAO.deptFindAll());
 

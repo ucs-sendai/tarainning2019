@@ -49,9 +49,9 @@ public class EmpUpdateDAO extends BaseDAO{
 
             return true;
         }catch(SQLException e){
-            throw new HrsmUcsDBException(MessageConstants.DB_ERR01);
-        }
+        	e.printStackTrace();
+        	throw new HrsmUcsDBException(MessageConstants.DB_ERR01);
     }
 		}
-
+}
 
