@@ -15,8 +15,7 @@ public class DeptFindAllLogicTest {
 	public void deptest1() throws HrsmUcsDBException {
 		DeptFindAllLogic deptFindAllLogic = new DeptFindAllLogic();
 		DeptDAO deptDAO = new DeptDAO();
-		assertEquals(deptDAO.deptFindAll(),deptDAO.deptFindAll());
-
+		assertEquals(deptFindAllLogic.deptExecute(),deptDAO.deptFindAll());
 	}
 
 	@Test
@@ -24,8 +23,7 @@ public class DeptFindAllLogicTest {
 	public void deptest2() throws HrsmUcsDBException{
 		DeptFindAllLogic deptFindAllLogic = new DeptFindAllLogic();
 		DeptDAO deptDAO = new DeptDAO();
-		assertNotEquals(deptDAO.deptFindAll(),deptDAO.deptFindAll());
-		assertNotEquals(deptFindAllLogic.deptExecute(),deptFindAllLogic.deptExecute());
-    }
+		assertNotEquals(deptFindAllLogic.deptExecute(),deptDAO.deptFindAll());
+	}
 
 }

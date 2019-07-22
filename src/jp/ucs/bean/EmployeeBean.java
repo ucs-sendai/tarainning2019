@@ -49,7 +49,7 @@ public class EmployeeBean {
 	}
 
 	/**
-	 *引数3つのコンストラクタ
+	 *引数6つのコンストラクタ
 	 * @param empId:社員ID
 	 * @param empName:社員の名前
 	 * @param ruby:社員の名前のふり
