@@ -8,6 +8,8 @@ import jp.ucs.dao.DeptDAO;
 import jp.ucs.exception.HrsmUcsDBException;
 import jp.ucs.logic.DeptFindAllLogic;
 
+
+//コミット時にエラーが出てソースを失ってしまったため今時点でOK
 public class DeptFindAllLogicTest {
 
 	@Test

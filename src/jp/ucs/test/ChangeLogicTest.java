@@ -9,6 +9,7 @@ import jp.ucs.exception.HrsmUcsDBException;
 import jp.ucs.logic.ChangeLogic;
 
 
+//コミット時にエラーが出てソースを失ってしまったため今時点でOK
 public class ChangeLogicTest{
 
 	//データベースが更新される
