@@ -11,7 +11,7 @@ jspファイル名 ：registerForm
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
-<%@ page import="jp.ucs.model.Dept"%>
+<%@ page import="jp.ucs.bean.DeptBean"%>
 
 <!DOCTYPE html >
 <html>
