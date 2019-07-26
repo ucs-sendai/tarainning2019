@@ -2,6 +2,7 @@ package jp.ucs.servlet;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,8 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import jp.ucs.bean.EmployeeBean;
+import jp.ucs.constants.Constants;
+import jp.ucs.constants.MessageConstants;
 import jp.ucs.logic.LoginLogic;
-import model.LoginLogicloginCheck;
 
 /**
  * システム名：社員管理システム
@@ -29,68 +32,44 @@ public class EntryMenuServlet extends HttpServlet {
 		super();
 	}
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response)
+					throws ServletException, IOException {
+		RequestDispatcher dispatcher =
+				request.getRequestDispatcher(Constants.admin);
+		dispatcher.forward(request,response);
+	}
 
-	};
+
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		String employeeId = request.getParameter("employeeId");
+		//社員IDとパスワードを取得
+		request.setCharacterEncoding("UTF-8");
+		String empId = request.getParameter("emp_id");
 		String pass = request.getParameter("pass");
-
+		String msg = "";
 		String forwardPath = null;
-		LoginLogic login = new LoginLogic();
 
-		if(login.loginCheck(employeeId,pass)){
-			//ログイン後に移動
-			//ログインユーザーが管理者か一般かを判断
-			if(employeeId.substring(0,4).equals("0000")){
-				//管理者
+		//入力項目の不備を処理
+		if (empId.equals("") || pass.equals("") || empId.length() != 8) {
+			msg = MessageConstants.LOGIN_ERR;
+			request.setAttribute("errorMsg",msg);
+			forwardPath = Constants.login;
+		}else{
+			EmployeeBean employeeBean = new EmployeeBean(empId, pass);
+			LoginLogic loginLogic = new LoginLogic();
 
-			}else {
-				//一般
+			//ログイン処理
+			//成功したらスコープに保存
+			HttpSession session = request.getSession();
+			session.setAttribute("employee",employeeBean);
 
-			}
-
-		} else {
-			//エラーメッセージ
+			//管理者か一般社員か判断する
+			RequestDispatcher dispatcher =
+					request.getRequestDispatcher(Constants.admin);
+			dispatcher.forward(request,response);
 		}
-
-
-
-		//ログインユーザーが管理者か一般かを判断
-		if(employeeId.substring(0,4).equals("0000")){
-
-			Login login = new Login(employeeId,pass);
-
-			//スコープに登録
-			if(logincheck.execute() == true){
-				HttpSession session = request.getSession();
-				session.setAttribute("employee",employee);
-
-				//フォワード
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/adminMenu.jsp");
-				dispatcher.forward(request,response);
-
-			}
-		}else if{
-			//ログインユーザーを設定
-			Employee employee = new Employee(empId,pass);
-
-			//セッションスコープにログインユーザーを登録
-			if(logincheck.execute() == true){
-				HttpSession session = request.getSession();
-				session.setAttribute("employee",employee);
-
-				//フォワード先を指定
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/generalMenu.jsp");
-				dispatcher.forward(request,response);
-
-				}
-			}
-
-			}
-
+	}
 }

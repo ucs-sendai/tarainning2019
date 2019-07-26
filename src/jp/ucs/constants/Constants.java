@@ -13,4 +13,7 @@ public final class Constants {
 	public static final String changeCheck = "/WEB-INF/jsp/changeCheck.jsp";
 	public static final String changeComp =  "/WEB-INF/jsp/changeComp.jsp";
 	public static final String error = "/WEB-INF/jsp/error.jsp";
+	public static final String admin = "/WEB-INF/jsp/adminMenu.jsp";
+	public static final String general = "/WEB-INF/jsp/generalMenu.jsp";
+	public static final String login = "/login.jsp";
 }

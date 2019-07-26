@@ -49,7 +49,7 @@ public class ChangeCompServlet extends HttpServlet {
 				HttpSession session = request.getSession();
 				EmployeeBean employee = (EmployeeBean)session.getAttribute("afterEmp");
 				ChangeLogic changeLogic = new ChangeLogic();
-				changeLogic.execute(employee);
+				changeLogic.changeExecute(employee);
 				session.setAttribute("afterEmp", employee);
 				forwardPath = Constants.changeComp;
 			}else{

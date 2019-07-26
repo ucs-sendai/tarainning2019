@@ -13,13 +13,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" style="text/css" href="/HrsmUcs/include.css"/>
+<link rel="stylesheet" style="text/css" href="/Hrsm/include.css"/>
 <meta charset="UTF-8">
 <title>社員管理システム</title>
 </head>
 <body>
 <jsp:include page="/title.jsp"/>
-<form action="/HrsmUcs/EntryMenu" method="post">
+<form action="/Hrsm/EntryMenu" method="post">
 <table>
     <tr>
         <th>社員ID</th>
