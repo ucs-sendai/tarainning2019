@@ -16,8 +16,8 @@ jspファイル名 ：empList
 <head>
 <meta charset="UTF-8">
 <title>社員一覧</title>
-<link rel="stylesheet" style="text/css" href="/HrsmUcs/include.css">
-<link rel="stylesheet" style="text/css" href="/HrsmUcs/include404.css">
+<link rel="stylesheet" style="text/css" href="/Hrsm/include.css">
+<link rel="stylesheet" style="text/css" href="/Hrsm/include404.css">
 
 </head>
 <body>

@@ -12,27 +12,27 @@
 <!DOCTYPE html >
 <html>
 <head>
-<link rel="stylesheet" style="text/css" href="/HrsmUcs/include.css"/>
+<link rel="stylesheet" style="text/css" href="/Hrsm/include.css"/>
 <meta charset="UTF-8">
 <title>メニュー画面(管理者)</title>
 </head>
 <body>
-	<form action="/HrsmUcs/EntryMenu" method="post">
+	<form action="/Hrsm/EntryMenu" method="post">
 		<jsp:include page="/title.jsp"></jsp:include>
 		<table>
 			<tr>
 				<td></td>
 				<td><c:out value="(${employee.empName})" /><br> <a
-					href="/HrsmUcs/Logout">ログアウト</a></td>
+					href="/Hrsm/Logout">ログアウト</a></td>
 			</tr>
 			<tr>
 				<td style="text-align: left">
-				    <a href="/HrsmUcs/EmpList">社員一覧</a><br>
-					<a href="/HrsmUcs/SearchMain">社員検索</a><br>
-					<a href="/HrsmUcs/RegisterEmp">社員登録</a><br>
-					<a href="/HrsmUcs/DeleteEmp">社員削除</a><br>
-				    社員情報変更(工事中)<br>
-					資格取得(工事中)<br>
+				    <a href="/Hrsm/EmpList">社員一覧</a><br>
+					<a href="/Hrsm/SearchMain">社員検索</a><br>
+					<a href="/Hrsm/RegisterEmp">社員登録</a><br>
+					<a href="/Hrsm/DeleteEmp">社員削除</a><br>
+				    <a href = "/Hrsm/ChangeStart">社員情報変更</a><br>
+					<a href = "/Hrsm/HaveLicense">資格取得</a><br>
 					部門管理(工事中)<br>
 					資格管理(工事中)<br>
 				</td>

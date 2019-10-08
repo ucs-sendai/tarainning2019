@@ -15,14 +15,14 @@ jspファイル名：searchMain.jsp
 <head>
 <meta charset="UTF-8">
 <title>社員検索</title>
-<link rel="stylesheet" style="text/css" href="/HrsmUcs/include.css">
-<link rel="stylesheet" style="text/css" href="/HrsmUcs/include404.css">
+<link rel="stylesheet" style="text/css" href="/Hrsm/include.css">
+<link rel="stylesheet" style="text/css" href="/Hrsm/include404.css">
 </head>
 <body>
 	<jsp:include page="/title.jsp"></jsp:include>
 	<jsp:include page="/header.jsp"></jsp:include>
 	<h1>社員検索</h1>
-	<form action="/HrsmUcs/SearchMain" method="get">
+	<form action="/Hrsm/SearchMain" method="get">
 	   <div  style="height:400px; width:600px;">
 		<table>
 			<tr>

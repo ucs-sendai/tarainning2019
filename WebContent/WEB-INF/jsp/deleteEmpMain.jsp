@@ -12,8 +12,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" style="text/css" href="/HrsmUcs/include.css">
-<link rel="stylesheet" style="text/css" href="/HrsmUcs/include404.css">
+<link rel="stylesheet" style="text/css" href="/Hrsm/include.css">
+<link rel="stylesheet" style="text/css" href="/Hrsm/include404.css">
 <meta charset="UTF-8">
 <title>社員削除</title>
 </head>
@@ -80,7 +80,7 @@
 	${message}
 
 	<c:if test="${not empty searchResultList }">
-		<form name="chBox" action="/HrsmUcs/DeleteEmp" method="post">
+		<form name="chBox" action="/Hrsm/DeleteEmp" method="post">
 			<div class="table1Div"><table class="table1">
 				<tr>
 					<th>削除</th>

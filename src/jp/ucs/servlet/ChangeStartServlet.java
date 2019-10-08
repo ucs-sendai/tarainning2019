@@ -1,7 +1,6 @@
 package jp.ucs.servlet;
 
 import java.io.IOException;
-import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,8 +12,6 @@ import javax.servlet.http.HttpSession;
 
 import jp.ucs.bean.EmployeeBean;
 import jp.ucs.constants.Constants;
-import jp.ucs.exception.HrsmUcsDBException;
-import jp.ucs.logic.DeptFindAllLogic;
 
 /**
  * システム名：社員管理システム
@@ -53,20 +50,10 @@ public class ChangeStartServlet extends HttpServlet {
 		session.setAttribute("beforeEmp", employee);
 
 		//メソッド呼び出し
-		DeptFindAllLogic deptFindAllLogic = new DeptFindAllLogic();
+
 
 		//登録とエラー処理
-		try{
-			Map<String, String> deptMap = deptFindAllLogic.deptExecute();
-			session.setAttribute("deptMap", deptMap);
-		}catch (HrsmUcsDBException e) {
-			e.printStackTrace();
-			request.setAttribute("errorMsg", e.getMessage());
 
-			RequestDispatcher dispatcher =
-					request.getRequestDispatcher(Constants.error);
-			dispatcher.forward(request, response);
-		}
 		//フォワード
 		RequestDispatcher dispatcher = request.getRequestDispatcher(Constants.changeEmp);
 		dispatcher.forward(request, response);

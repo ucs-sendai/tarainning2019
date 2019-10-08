@@ -13,8 +13,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" style="text/css" href="/HrsmUcs/include.css">
-<link rel="stylesheet" style="text/css" href="/HrsmUcs/include404.css">
+<link rel="stylesheet" style="text/css" href="/Hrsm/include.css">
+<link rel="stylesheet" style="text/css" href="/Hrsm/include404.css">
 <jsp:include page="/title.jsp"></jsp:include>
 <title>社員削除</title>
 </head>
@@ -27,6 +27,11 @@
 			<th>氏名</th>
 			<th>部門</th>
 		</tr>
+			<tr>
+			<th>00192818</th>
+			<th>小西香菜子</th>
+			<th>仙台事業所</th>
+		</tr>
 		<c:forEach var="delete" items="${deleteEmpList }">
 			<tr>
 				<td><c:out value="${delete.empId}" /></td>
@@ -35,8 +40,8 @@
 			</tr>
 		</c:forEach>
 	</table>
-	<a href="/HrsmUcs/DeleteEmp?action=no">いいえ</a>
-	<a href="/HrsmUcs/DeleteEmp?action=yes">はい</a>
+	<a href="/Hrsm/EntryMenu">いいえ</a>
+	<a href="/Hrsm/DeleteEmp">はい</a>
 	</div>
 	<jsp:include page="/footer.jsp"></jsp:include>
 </body>

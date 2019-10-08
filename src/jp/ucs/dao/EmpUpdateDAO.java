@@ -23,11 +23,11 @@ public class EmpUpdateDAO extends BaseDAO{
 		try (Connection  conn = getConnection()){
 			//SQL文の準備
 			StringBuilder sb = new StringBuilder();
-			sb.append("UPDATE employee ");
-			sb.append("SET property_id = ?, serial_id = ?, ");
+			sb.append("Update employee ");
+			sb.append("set property_id = ?, serial_id = ?, ");
 			sb.append("emp_name = = ?, ruby = ?, ");
 			sb.append("pass = ?, entry_date = ?, dept_id = ? ");
-			sb.append("WHERE property_id = ? AND serial_id = ?;");
+			sb.append("where property_id = ? and serial_id = ?;");
 
 			//SQL文の実行
 			PreparedStatement pStmt = conn.prepareStatement(sb.toString());

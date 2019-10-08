@@ -7,14 +7,20 @@ import java.sql.SQLException;
 public class BaseDAO {
 
 	protected static final String DRIVER_NAME = "org.postgresql.Driver";
-	protected static final String DB_URL = "jdbc:postgresql:hrsmucs";
+	protected static final String DB_URL = "jdbc:postgresql:Hrsm";
 	protected static final String DB_ID = "postgres";
 	protected static final String PWD = "HrsmUcs@2019";
 
 	protected static Connection getConnection() throws SQLException {
-		Connection conn = null;
+		try {
+            // postgreSQLのJDBCドライバを読み込み
+            Class.forName("org.postgresql.Driver");
+        } catch(ClassNotFoundException e) {
+            // JDBCドライバが見つからない場合
+            e.printStackTrace();
+        }
 
-		conn = DriverManager.getConnection(DB_URL, DB_ID, PWD);
+		Connection conn = DriverManager.getConnection(DB_URL, DB_ID, PWD);
 
 		return conn;
 	}

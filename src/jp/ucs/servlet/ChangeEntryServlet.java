@@ -81,7 +81,7 @@ public class ChangeEntryServlet extends HttpServlet {
 		session.setAttribute("afterEmp", afterEmp);
 		session.setAttribute("errorMsgMap",errorMsgMap);
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher(Constants.changeCheck);
+		RequestDispatcher dispatcher = request.getRequestDispatcher(Constants.changeComp);
 		dispatcher.forward(request, response);
 
 

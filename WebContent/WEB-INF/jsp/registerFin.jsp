@@ -14,7 +14,7 @@ jspファイル名 ：registerFin
 <!DOCTYPE html >
 <html>
 <head>
-<link rel="stylesheet" style="text/css" href="/HrsmUcs/include.css">
+<link rel="stylesheet" style="text/css" href="/Hrsm/include.css">
 
 <meta charset="UTF-8">
 <title>社員管理システム</title>
@@ -25,13 +25,16 @@ jspファイル名 ：registerFin
 	<jsp:include page="/header.jsp"></jsp:include>
 
 	<h1>登録完了</h1>
-	<h3>社員ID　:
-	<c:out value="${empId}"></c:out>　
+	<h3>
+		社員ID :
+		<c:out value="${empId}"></c:out>
 
-	<c:out value="${registerEmp.empName}"></c:out>さん</h3>
+		<c:out value="${registerEmp.empName}"></c:out>
+		さん
+	</h3>
 	<h3>を登録しました。</h3>
 
-	　　　　　　　　　　　　<a href="/HrsmUcs/RegisterEmp">戻る</a>
+	<a href="/Hrsm/RegisterEmp">戻る</a>
 	<jsp:include page="/footer.jsp"></jsp:include>
 
 </body>

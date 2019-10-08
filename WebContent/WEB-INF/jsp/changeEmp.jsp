@@ -12,7 +12,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" style="text/css" href="/HrsmUcs/include.css">
+<link rel="stylesheet" style="text/css" href="/Hrsm/include.css">
 <meta charset="UTF-8">
 <title>社員情報変更</title>
 </head>
@@ -20,50 +20,9 @@
     <jsp:include page="/title.jsp" />
     <jsp:include page="/header.jsp" />
     <h1>社員情報変更</h1>
-    <form action="/HrsmUcs/ChangeEntry" method="post">
+    <form action="/Hrsm/ChangeEntry" method="post">
         <table>
-            <c:choose>
-                <c:when test="${empty afterEmp }">
-                    <tr>
-                        <td>社員ID</td>
-                        <td><c:out value="${beforeEmp.empId}" /></td>
-                    </tr>
-                    <tr>
-                        <td>氏名</td>
-                        <td><input type="text" name="name"
-                            value="${beforeEmp.empName}"></td>
-                    </tr>
-                    <tr>
-                        <td>ふりがな</td>
-                        <td><input type="text" name="ruby" value="${beforeEmp.ruby}"></td>
-                    </tr>
-                    <tr>
-                        <td>部門</td>
-                        <td><select style="width: 154px;" name="dept">
-                                <c:forEach var="dept" items="${deptMap}">
-                                    <c:choose>
-                                        <c:when test="${beforeEmp.dept.deptId == dept.key}">
-                                            <option value="${dept.key}" selected>${dept.value}</option>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <option value="${dept.key}">${dept.value}</option>
-                                        </c:otherwise>
-                                    </c:choose>
-                                </c:forEach>
-                        </select></td>
-                    </tr>
-                    <tr>
-                        <td>パスワード</td>
-                        <td><input type="password" style="width: 150px;" name="pass"
-                            value="${beforeEmp.pass}"></td>
-                    </tr>
-                    <tr>
-                        <td>入社年月日</td>
-                        <td><input type="text" name="date"
-                            value="${beforeEmp.entryDate}"></td>
-                    </tr>
-                </c:when>
-                <c:otherwise>
+
                     <tr>
                         <td>社員ID</td>
                         <td><c:out value="${afterEmp.empId}" /></td>
@@ -94,21 +53,31 @@
                         </c:choose>
                     </tr>
                     <tr>
-                        <td>部門</td>
-                        <td><select style="width: 154px;" name="dept">
-                                <c:forEach var="dept" items="${deptMap}">
-                                    <c:choose>
-                                        <c:when test="${afterEmp.dept.deptId == dept.key}">
-                                            <option value="${dept.key}" selected>${dept.value}</option>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <option value="${dept.key}">${dept.value}</option>
-                                        </c:otherwise>
-                                    </c:choose>
-                                </c:forEach>
-                        </select></td>
-                    </tr>
-                    <tr>
+                        <tr>
+				<th>部門</th>
+
+				<td><select name="dept" size="1">
+						<option value = "null"></option>
+						<option value="zaimu">管理本部経理財務</option>
+						<option value="kannrikikaku">管理本部営業企画</option>
+						<option value="eikikaku">営業部営業企画</option>
+						<option value="syougai">営業部渉外</option>
+						<option value="zaimu">システム本部金融</option>
+						<option value="sangyou">システム本部産業</option>
+						<option value="osaka">大阪事業所</option>
+						<option value="sendai">仙台事業所</option>
+						<c:forEach var="dept" items="${deptMap}">
+							<option value="${dept.key}">${dept.value}</option>
+						</c:forEach>
+				</select></td>
+			</tr>
+						<c:forEach var="dept" items="${deptMap}">
+							<option value="${dept.key}">${dept.value}</option>
+						</c:forEach>
+
+
+
+                    	<tr>
                         <td>パスワード</td>
                         <td><input type="password" style="width: 144px;" name="pass"
                             value="${afterEmp.pass}"></td>
@@ -134,8 +103,8 @@
                             </c:when>
                         </c:choose>
                     </tr>
-                </c:otherwise>
-            </c:choose>
+
+
         </table>
         <input type="submit" value="登録">
     </form>

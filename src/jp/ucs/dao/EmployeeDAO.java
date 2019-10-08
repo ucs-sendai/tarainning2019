@@ -1,6 +1,7 @@
 package jp.ucs.dao;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -26,7 +27,7 @@ public class EmployeeDAO extends BaseDAO{
 		List<EmployeeBean> empList = new ArrayList<>();
 
 
-		try (Connection conn = getConnection()) {
+		try (Connection conn = DriverManager.getConnection(DB_URL, DB_ID, PWD)) {
 
 			StringBuilder sb = new StringBuilder();
 			sb.append("select property_id ,serial_id,emp_name,ruby,pass,entry_date");
@@ -37,6 +38,8 @@ public class EmployeeDAO extends BaseDAO{
 
 			//DBから情報を取り出し、インスタンスに格納
 			while (rs.next()) {
+				String propertyid = rs.getString("property_id");
+				String serialid = rs.getString("serial_id");
 				String empId = rs.getString("emp_id");
 				String empName = rs.getString("emp_name");
 				String ruby = rs.getString("ruby");
@@ -63,14 +66,14 @@ public class EmployeeDAO extends BaseDAO{
 	 */
 
 	public boolean findByEmployee(EmployeeBean employeeBean) throws HrsmUcsDBException{
-		try(Connection  conn = getConnection()){
+		try(Connection conn = DriverManager.getConnection(DB_URL, DB_ID, PWD)){
 
 			//SQL文の準備
 			StringBuilder sb = new StringBuilder();
 			sb.append("select property_id ,serial_id,emp_name,ruby,pass,entry_date");
 			sb.append("from employee join dept");
 			sb.append("on employee.dept_id = dept.dept_id");
-			sb.append("where property_id = ? and serial_id = ? and pass = ?;");
+			sb.append("where property_id = '?' and serial_id = '?' and pass = '?';");
 
 			//SQL文の実行
 

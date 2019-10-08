@@ -13,12 +13,13 @@ import javax.servlet.http.HttpSession;
 import jp.ucs.bean.EmployeeBean;
 import jp.ucs.constants.Constants;
 import jp.ucs.constants.MessageConstants;
+import jp.ucs.exception.HrsmUcsDBException;
 import jp.ucs.logic.LoginLogic;
 
 /**
  * システム名：社員管理システム
  * クラス名  ：EntryMenu
- * 処理概要  ：ログイン画面をコントロールする
+ * 処理概要  ：ログイン処理
  * プロジェクト名：HrsmUcs(ログイン画面)
  * 作成者    ：高原 優
  * 作成日付：2019/07/08(月)
@@ -28,48 +29,84 @@ import jp.ucs.logic.LoginLogic;
 public class EntryMenuServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public EntryMenuServlet() {
-		super();
-	}
-
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response)
-					throws ServletException, IOException {
-		RequestDispatcher dispatcher =
-				request.getRequestDispatcher(Constants.admin);
-		dispatcher.forward(request,response);
-	}
 
 
+	 //topリンクから管理者か一般のメニューに戻る
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        EmployeeBean employee = (EmployeeBean) session.getAttribute("employee");
 
-		//社員IDとパスワードを取得
-		request.setCharacterEncoding("UTF-8");
-		String empId = request.getParameter("emp_id");
-		String pass = request.getParameter("pass");
-		String msg = "";
-		String forwardPath = null;
+        if(employee.getEmpId().substring(0,4).equals("0000")){
+            RequestDispatcher dispatcher =
+                    request.getRequestDispatcher(Constants.admin);
+            dispatcher.forward(request,response);
+        }else{
+            RequestDispatcher dispatcher =
+                    request.getRequestDispatcher(Constants.general);
+            dispatcher.forward(request,response);
+        }
+    }
 
-		//入力項目の不備を処理
-		if (empId.equals("") || pass.equals("") || empId.length() != 8) {
-			msg = MessageConstants.LOGIN_ERR;
-			request.setAttribute("errorMsg",msg);
-			forwardPath = Constants.login;
-		}else{
-			EmployeeBean employeeBean = new EmployeeBean(empId, pass);
-			LoginLogic loginLogic = new LoginLogic();
 
-			//ログイン処理
-			//成功したらスコープに保存
-			HttpSession session = request.getSession();
-			session.setAttribute("employee",employeeBean);
 
-			//管理者か一般社員か判断する
-			RequestDispatcher dispatcher =
-					request.getRequestDispatcher(Constants.admin);
-			dispatcher.forward(request,response);
-		}
-	}
+protected void doPost(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException {
+
+    //JSPからIDとパスワードを受け取る
+    request.setCharacterEncoding("UTF-8");
+    String empId = request.getParameter("emp_id");
+    String pass = request.getParameter("pass");
+    String msg = "";
+    String path = "";
+
+    if (empId.equals("") || pass.equals("") || empId.length() != 8) {
+        msg = MessageConstants.LOGIN_ERR;
+        request.setAttribute("errorMsg",msg);
+        path = Constants.login;
+
+    //EmployeeBean型のインスタンスを作成し、それを引数にLoginLogicを実行(BO)
+    } else {
+        EmployeeBean employee = new EmployeeBean(empId, pass);
+        LoginLogic bo = new LoginLogic();
+
+        try{
+            boolean result = bo.loginExecute(employee);
+
+            //ログイン認証が成功した場合、管理者か一般かをsubstringで判別する
+            if(result){
+                HttpSession session = request.getSession();
+                session.setAttribute("employee", employee);
+
+                //先頭4桁が"0000"の場合、管理者メニューにフォワード
+                if(empId.substring(0,4).equals("0000")){
+                    path = Constants.admin;
+
+                //先頭4桁が"0000"でない場合、一般メニューにフォワード
+                }else{
+                    path = Constants.general;
+                }
+
+            //ログイン認証が成功しなかった場合、login.jspにフォワード
+            }else{
+                msg = MessageConstants.LOGIN_ERR;
+                request.setAttribute("errorMsg",msg);
+                path = Constants.login;
+            }
+
+        //DBエラーが生じた場合、エラー画面にフォワード
+        } catch(HrsmUcsDBException e) {
+            msg = MessageConstants.DB_ERR01;
+            request.setAttribute("errorMsg",msg);
+            path =Constants.error;
+        }
+
+    }
+    RequestDispatcher dispatcher =
+            request.getRequestDispatcher(path);
+    dispatcher.forward(request,response);
+
 }
+}
+

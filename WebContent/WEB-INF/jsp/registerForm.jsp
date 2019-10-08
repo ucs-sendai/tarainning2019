@@ -18,7 +18,7 @@ jspファイル名 ：registerForm
 <head>
 
 <meta charset="UTF-8">
-<link rel="stylesheet" style="text/css" href="/HrsmUcs/include.css">
+<link rel="stylesheet" style="text/css" href="/Hrsm/include.css">
 <title>社員管理システム</title>
 </head>
 <body>
@@ -27,7 +27,7 @@ jspファイル名 ：registerForm
 
 	<h1>社員登録</h1>
 
-	<form action="/HrsmUcs/RegisterEmp" method="post">
+	<form action="/Hrsm/RegisterEmp" method="post">
 		<table>
 			<tr>
 				<th>氏名</th>
@@ -64,7 +64,15 @@ jspファイル名 ：registerForm
 				<th>部門</th>
 
 				<td><select name="dept" size="1">
-						<option value="${registerEmp.dept.deptId}">${registerEmp.dept.deptName }</option>
+						<option value = "null"></option>
+						<option value="zaimu">管理本部経理財務</option>
+						<option value="kannrikikaku">管理本部営業企画</option>
+						<option value="eikikaku">営業部営業企画</option>
+						<option value="syougai">営業部渉外</option>
+						<option value="zaimu">システム本部金融</option>
+						<option value="sangyou">システム本部産業</option>
+						<option value="osaka">大阪事業所</option>
+						<option value="sendai">仙台事業所</option>
 						<c:forEach var="dept" items="${deptMap}">
 							<option value="${dept.key}">${dept.value}</option>
 						</c:forEach>
