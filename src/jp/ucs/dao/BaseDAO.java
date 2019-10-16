@@ -12,11 +12,14 @@ public class BaseDAO {
 	protected static final String PWD = "HrsmUcs@2019";
 
 	protected static Connection getConnection() throws SQLException {
-		Connection conn = null;
+		try {
+			// postgreSQLのJDBCドライバを読み込み
+			Class.forName("org.postgresql.Driver");
+		} catch (ClassNotFoundException e) {
+			// JDBCドライバが見つからない場合
+			e.printStackTrace();
+		}
 
-		conn = DriverManager.getConnection(DB_URL, DB_ID, PWD);
-
-		return conn;
+		return DriverManager.getConnection(DB_URL, DB_ID, PWD);
 	}
-
 }

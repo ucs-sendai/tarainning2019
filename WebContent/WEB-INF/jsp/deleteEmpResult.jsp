@@ -2,7 +2,7 @@
 システム名：社員管理システム
 ファイル名：deleteEmpResult
 処理概要：削除完了を知らせる
-プロジェクト名:HrsmUcs(社員削除)
+プロジェクト名:Hrsm(社員削除)
 氏名    ：松井彩乃
 作成日付：2019/06/21(金)
  --%>
@@ -15,7 +15,7 @@
 <meta charset="UTF-8">
 <title>社員削除</title>
 
-<link rel="stylesheet" style="text/css" href="/HrsmUcs/include.css">
+<link rel="stylesheet" style="text/css" href="/Hrsm/include.css">
 
 </head>
 <body>
@@ -27,7 +27,7 @@
 <h3>社員を削除しました</h3>
 
 
-<a href="/HrsmUcs/DeleteEmp">戻る</a>
+<a href="/Hrsm/DeleteEmp">戻る</a>
 <jsp:include page="/footer.jsp"/>
 
 </body>

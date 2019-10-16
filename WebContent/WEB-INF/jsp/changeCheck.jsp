@@ -12,7 +12,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" style="text/css" href="/HrsmUcs/include.css">
+<link rel="stylesheet" style="text/css" href="/Hrsm/include.css">
 <meta charset="UTF-8">
 <title>社員情報変更</title>
 </head>
@@ -53,8 +53,8 @@
 		</tr>
     </table>
 
-    <a href="/HrsmUcs/ChangeComp?action=no">いいえ</a>
-    <a href="/HrsmUcs/ChangeComp?action=yes">はい</a>
+    <a href="/Hrsm/ChangeComp?action=no">いいえ</a>
+    <a href="/Hrsm/ChangeComp?action=yes">はい</a>
     <jsp:include page="/footer.jsp" />
 </body>
 </html>

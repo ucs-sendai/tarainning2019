@@ -2,7 +2,7 @@
 システム名    ：社員管理システム
 jspファイル名 ：registerForm
 処理概要      ：登録したい社員の情報を入力する
-プロジェクト名：HrsmUcs(社員登録)
+プロジェクト名：Hrsm(社員登録)
 作成者        ：ティンザーテッ
 作成日付      ：2019/06/25(火)
  --%>
@@ -18,7 +18,7 @@ jspファイル名 ：registerForm
 <head>
 
 <meta charset="UTF-8">
-<link rel="stylesheet" style="text/css" href="/HrsmUcs/include.css">
+<link rel="stylesheet" style="text/css" href="/Hrsm/include.css">
 <title>社員管理システム</title>
 </head>
 <body>
@@ -27,7 +27,7 @@ jspファイル名 ：registerForm
 
 	<h1>社員登録</h1>
 
-	<form action="/HrsmUcs/RegisterEmp" method="post">
+	<form action="/Hrsm/RegisterEmp" method="post">
 		<table>
 			<tr>
 				<th>氏名</th>

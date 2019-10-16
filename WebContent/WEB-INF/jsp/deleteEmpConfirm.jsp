@@ -2,7 +2,7 @@
  システム名：社員管理システム
  ファイル名：delete
  処理概要：削除確認を知らせる
- プロジェクト名：HrsmUcs(社員削除)
+ プロジェクト名：Hrsm(社員削除)
  作成者：今村凌
  作成日付：2019/06/20(木)
  --%>
@@ -13,8 +13,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" style="text/css" href="/HrsmUcs/include.css">
-<link rel="stylesheet" style="text/css" href="/HrsmUcs/include404.css">
+<link rel="stylesheet" style="text/css" href="/Hrsm/include.css">
+<link rel="stylesheet" style="text/css" href="/Hrsm/include404.css">
 <jsp:include page="/title.jsp"></jsp:include>
 <title>社員削除</title>
 </head>
@@ -35,8 +35,8 @@
 			</tr>
 		</c:forEach>
 	</table>
-	<a href="/HrsmUcs/DeleteEmp?action=no">いいえ</a>
-	<a href="/HrsmUcs/DeleteEmp?action=yes">はい</a>
+	<a href="/Hrsm/DeleteEmp?action=no">いいえ</a>
+	<a href="/Hrsm/DeleteEmp?action=yes">はい</a>
 	</div>
 	<jsp:include page="/footer.jsp"></jsp:include>
 </body>

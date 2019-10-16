@@ -2,7 +2,7 @@
  システム名：社員管理システム
  ファイル名：login
  処理概要：ログイン画面操作
- プロジェクト名：HrsmUcs(共通)
+ プロジェクト名：Hrsm(共通)
  作成者：スピェッウォン
  作成日付：2019/06/21(金)
  --%>
@@ -13,13 +13,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" style="text/css" href="/HrsmUcs/include.css"/>
+<link rel="stylesheet" style="text/css" href="/Hrsm/include.css"/>
 <meta charset="UTF-8">
 <title>社員管理システム</title>
 </head>
 <body>
 <jsp:include page="/title.jsp"/>
-<form action="/HrsmUcs/EntryMenu" method="post">
+<form action="/Hrsm/EntryMenu" method="post">
 <table>
     <tr>
         <th>社員ID</th>

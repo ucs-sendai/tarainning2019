@@ -12,7 +12,7 @@
 <!DOCTYPE html >
 <html>
 <head>
-<link rel="stylesheet" style="text/css" href="/HrsmUcs/include.css">
+<link rel="stylesheet" style="text/css" href="/Hrsm/include.css">
 <meta charset="UTF-8">
 <title>変更完了</title>
 </head>

@@ -2,7 +2,7 @@
 システム名：社員管理システム
 ファイル名：deleteEmpMain
 処理概要  ：削除する社員を選ぶ
-プロジェクト名：HrsmUcs(社員削除)
+プロジェクト名：Hrsm(社員削除)
 作成者    ：石井健斗、安田翔
 作成日付  ：2019/06/26(水)
  --%>
@@ -12,8 +12,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" style="text/css" href="/HrsmUcs/include.css">
-<link rel="stylesheet" style="text/css" href="/HrsmUcs/include404.css">
+<link rel="stylesheet" style="text/css" href="/Hrsm/include.css">
+<link rel="stylesheet" style="text/css" href="/Hrsm/include404.css">
 <meta charset="UTF-8">
 <title>社員削除</title>
 </head>
@@ -21,7 +21,7 @@
 	<jsp:include page="/title.jsp" />
 	<jsp:include page="/header.jsp" />
 	<h1>削除社員選択</h1>
-	<form action="/HrsmUcs/DeleteEmp" method="get">
+	<form action="/Hrsm/DeleteEmp" method="get">
 		<table class="table0">
 			<tr>
 				<td><h3>社員ID</h3></td>
@@ -80,7 +80,7 @@
 	${message}
 
 	<c:if test="${not empty searchResultList }">
-		<form name="chBox" action="/HrsmUcs/DeleteEmp" method="post">
+		<form name="chBox" action="/Hrsm/DeleteEmp" method="post">
 			<div class="table1Div"><table class="table1">
 				<tr>
 					<th>削除</th>

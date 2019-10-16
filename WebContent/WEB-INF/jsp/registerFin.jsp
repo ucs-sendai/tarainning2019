@@ -2,7 +2,7 @@
 システム名    ：社員管理システム
 jspファイル名 ：registerFin
 処理概要      ：登録完了の表示
-プロジェクト名：HrsmUcs(社員登録)
+プロジェクト名：Hrsm(社員登録)
 作成者        ：ティンザーテッ
 作成日付      ：2019/06/25(火)
  --%>
@@ -14,7 +14,7 @@ jspファイル名 ：registerFin
 <!DOCTYPE html >
 <html>
 <head>
-<link rel="stylesheet" style="text/css" href="/HrsmUcs/include.css">
+<link rel="stylesheet" style="text/css" href="/Hrsm/include.css">
 
 <meta charset="UTF-8">
 <title>社員管理システム</title>
@@ -31,7 +31,7 @@ jspファイル名 ：registerFin
 	<c:out value="${registerEmp.empName}"></c:out>さん</h3>
 	<h3>を登録しました。</h3>
 
-	　　　　　　　　　　　　<a href="/HrsmUcs/RegisterEmp">戻る</a>
+	　　　　　　　　　　　　<a href="/Hrsm/RegisterEmp">戻る</a>
 	<jsp:include page="/footer.jsp"></jsp:include>
 
 </body>

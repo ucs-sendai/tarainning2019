@@ -2,7 +2,7 @@
 システム名：社員管理システム
 ファイル名：error
 処理概要  ：DBエラー処理
-プロジェクト名：HrsmUcs(社員検索)
+プロジェクト名：Hrsm(社員検索)
 作成者    ：野島知博
 作成日付  ：2019/06/24(月)
  --%>
@@ -14,10 +14,10 @@
 <head>
 <meta charset="UTF-8">
 <title>エラーメッセージ</title>
-<link rel="stylesheet" style="text/css" href="/HrsmUcs/include.css">
+<link rel="stylesheet" style="text/css" href="/Hrsm/include.css">
 </head>
 <body>
-    <form action="/HrsmUcs/EntryMenu" method="post">
+    <form action="/Hrsm/EntryMenu" method="post">
         <jsp:include page="/title.jsp"></jsp:include>
     </form>
         <p>${errorMsg }</p>

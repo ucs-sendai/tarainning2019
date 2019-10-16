@@ -12,7 +12,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" style="text/css" href="/HrsmUcs/include.css">
+<link rel="stylesheet" style="text/css" href="/Hrsm/include.css">
 <meta charset="UTF-8">
 <title>社員情報変更</title>
 </head>
@@ -20,7 +20,7 @@
     <jsp:include page="/title.jsp" />
     <jsp:include page="/header.jsp" />
     <h1>社員情報変更</h1>
-    <form action="/HrsmUcs/ChangeEntry" method="post">
+    <form action="/Hrsm/ChangeEntry" method="post">
         <table>
             <c:choose>
                 <c:when test="${empty afterEmp }">

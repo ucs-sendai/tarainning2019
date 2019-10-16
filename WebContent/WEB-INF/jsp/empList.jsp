@@ -2,7 +2,7 @@
 システム名    ：社員管理システム
 jspファイル名 ：empList
 処理概要      ：社員一覧表を表示させる
-プロジェクト名：HrsmUcs(社員一覧)
+プロジェクト名：Hrsm(社員一覧)
 作成者        ：倉石寿洋
 作成日付      ：2019/06/25(火)
  --%>
@@ -16,8 +16,8 @@ jspファイル名 ：empList
 <head>
 <meta charset="UTF-8">
 <title>社員一覧</title>
-<link rel="stylesheet" style="text/css" href="/HrsmUcs/include.css">
-<link rel="stylesheet" style="text/css" href="/HrsmUcs/include404.css">
+<link rel="stylesheet" style="text/css" href="/Hrsm/include.css">
+<link rel="stylesheet" style="text/css" href="/Hrsm/include404.css">
 
 </head>
 <body>
