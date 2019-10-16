@@ -13,7 +13,7 @@ public class DeptBean {
 	private String deptName;
 
 	/**
-	 * ディフォルトコンストラクタ
+	 * デフォルトコンストラクタ
 	 */
 	public DeptBean() {
 

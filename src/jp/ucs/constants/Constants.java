@@ -27,4 +27,5 @@ public final class Constants {
 	public static final String searchMain = "/WEB-INF/jsp/searchMain.jsp";
 	public static final String haveLicenseRegister ="/WEB-INF/jsp/haveLicenseRegister.jsp";
 	public static final String haveLicenseFin ="/WEB-INF/jsp/haveLicenseFin.jsp";
+	public static final String haveLicenseSelect ="/WEB-INF/jsp/haveLicenseSelect.jsp";
 }

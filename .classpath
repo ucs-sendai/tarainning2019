@@ -17,5 +17,6 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/javax.servlet.jsp.jstl-api-1.2.1.jar"/>
 	<classpathentry kind="lib" path="C:/pleiades-e4.5-java-jre_20160312/pleiades/dbunit-2.4.9.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/postgresql-42.2.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/knk.konishi/Desktop/javax.servlet.jsp.jstl-1.2.1.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

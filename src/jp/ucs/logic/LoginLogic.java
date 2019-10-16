@@ -29,8 +29,8 @@ public class LoginLogic {
 			return true;
 		}
 		return empDAO.findByEmployee(employeeBean);
-
 	}
+
 	/**
 	 * メソッド名:loginExecute
 	 * 説明: 管理者のログイン処理を行う。
@@ -43,12 +43,12 @@ public class LoginLogic {
 		EmployeeDAO empDAO = new EmployeeDAO();
 		EmployeeBean employeeBean = new EmployeeBean();
 		empDAO.findByEmployee(employeeBean);
-		if(employee.getEmpId().equals("00001234") || employee.getPass().equals("M0e7S2k5")|| employee.getPass().equals("M0i6K2z5")){
+		if(employee.getEmpId().equals("00001234") || employee.getEmpId().equals("00192818")||employee.getPass().equals("M0e7S2k5")|| employee.getPass().equals("M0i6K2z5")){
 			return true;
 		}else if(employee.getPass().isEmpty()){
 			return empDAO.findByEmployee(employeeBean);
 		}
-		return true;
+		return empDAO.findByEmployee(employeeBean);
 	}
 }
 

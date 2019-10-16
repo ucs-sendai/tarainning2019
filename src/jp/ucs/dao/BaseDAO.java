@@ -14,7 +14,7 @@ public class BaseDAO {
 	protected static Connection getConnection() throws SQLException {
 		try {
             // postgreSQLのJDBCドライバを読み込み
-            Class.forName("org.postgresql.Driver");
+            Class.forName(DRIVER_NAME);
         } catch(ClassNotFoundException e) {
             // JDBCドライバが見つからない場合
             e.printStackTrace();

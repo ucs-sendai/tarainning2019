@@ -25,7 +25,7 @@
 
                     <tr>
                         <td>社員ID</td>
-                        <td><c:out value="${afterEmp.empId}" /></td>
+                        <td><c:out value="${empId}" /></td>
                     </tr>
 					<tr>
 						<td>氏名</td>
