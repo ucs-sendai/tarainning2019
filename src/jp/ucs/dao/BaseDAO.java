@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class BaseDAO {
 
 	protected static final String DRIVER_NAME = "org.postgresql.Driver";
-	protected static final String DB_URL = "jdbc:postgresql:Hrsm";
+	protected static final String DB_URL = "jdbc:postgresql:hrsmucs";
 	protected static final String DB_ID = "postgres";
 	protected static final String PWD = "HrsmUcs@2019";
 

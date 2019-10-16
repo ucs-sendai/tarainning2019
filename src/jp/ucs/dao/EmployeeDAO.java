@@ -21,7 +21,7 @@ import jp.ucs.exception.HrsmUcsDBException;
  * 作成日付：2019/07/10(水)
  */
 
-public class EmployeeDAO extends BaseDAO{
+public class EmployeeDAO extends DAOProperty{
 
 	public List<EmployeeBean> employeeFindAll(){
 		List<EmployeeBean> empList = new ArrayList<>();
@@ -30,7 +30,7 @@ public class EmployeeDAO extends BaseDAO{
 		try (Connection conn = DriverManager.getConnection(DB_URL, DB_ID, PWD)) {
 
 			StringBuilder sb = new StringBuilder();
-			sb.append("select property_id ,serial_id,emp_name,ruby,pass,entry_date");
+			sb.append("select * ");
 			sb.append("from employee;");
 			PreparedStatement pstmt = conn.prepareStatement(sb.toString());
 			ResultSet rs = pstmt.executeQuery();
@@ -38,17 +38,17 @@ public class EmployeeDAO extends BaseDAO{
 
 			//DBから情報を取り出し、インスタンスに格納
 			while (rs.next()) {
-				String propertyid = rs.getString("property_id");
-				String serialid = rs.getString("serial_id");
-				String empId = rs.getString("emp_id");
+				String propertyId = rs.getString("property_id");
+				String serialId = rs.getString("serial_id");
+				//String empId = rs.getString("emp_id");
 				String empName = rs.getString("emp_name");
 				String ruby = rs.getString("ruby");
 				String pass = rs.getString("pass");
-				String entryDate = rs.getString("entryDate");
+				String entryDate = rs.getString("entry_date");
 				String deptId = rs.getString("dept_id");
-				String deptName = rs.getString("dept_name");
-				DeptBean dept = new DeptBean(deptId,deptName);
-				EmployeeBean employeeBean = new EmployeeBean(empId, empName, ruby, pass, entryDate, dept);
+				//String deptName = rs.getString("dept_name");
+				//DeptBean dept = new DeptBean(deptId,deptName);
+				EmployeeBean employeeBean = new EmployeeBean(propertyId,serialId, empName, ruby, pass, entryDate);
 				empList.add(employeeBean);
 			}
 
@@ -70,17 +70,20 @@ public class EmployeeDAO extends BaseDAO{
 
 			//SQL文の準備
 			StringBuilder sb = new StringBuilder();
-			sb.append("select property_id ,serial_id,emp_name,ruby,pass,entry_date");
-			sb.append("from employee join dept");
-			sb.append("on employee.dept_id = dept.dept_id");
+			sb.append("select property_id ,serial_id,emp_name,ruby,pass,entry_date ");
+			sb.append("from employee join dept ");
+			sb.append("on employee.dept_id = dept.dept_id ");
 			sb.append("where property_id = '?' and serial_id = '?' and pass = '?';");
+
+			String empId = employeeBean.getEmpId();
 
 			//SQL文の実行
 
 			PreparedStatement pStmt = conn.prepareStatement(sb.toString());
 
-			pStmt.setString(1, employeeBean.getEmpId());
-			pStmt.setString(2,employeeBean.getPass());
+			pStmt.setString(1, empId.substring(0,4));
+            pStmt.setString(2, empId.substring(4,8));
+            pStmt.setString(3, employeeBean.getPass());
 
 			ResultSet rs = pStmt.executeQuery();
 
