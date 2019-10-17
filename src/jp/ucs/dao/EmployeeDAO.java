@@ -71,11 +71,12 @@ public class EmployeeDAO extends DAOProperty{
 			//SQL文の準備
 			StringBuilder sb = new StringBuilder();
 			sb.append("select property_id ,serial_id,emp_name,ruby,pass,entry_date ");
-			sb.append("from employee join dept ");
+			sb.append("from employee inner join dept ");
 			sb.append("on employee.dept_id = dept.dept_id ");
 			sb.append("where property_id = '?' and serial_id = '?' and pass = '?';");
 
 			String empId = employeeBean.getEmpId();
+			String pass =employeeBean.getPass();
 
 			//SQL文の実行
 
@@ -83,7 +84,7 @@ public class EmployeeDAO extends DAOProperty{
 
 			pStmt.setString(1, empId.substring(0,4));
             pStmt.setString(2, empId.substring(4,8));
-            pStmt.setString(3, employeeBean.getPass());
+            pStmt.setString(3, pass);
 
 			ResultSet rs = pStmt.executeQuery();
 
@@ -101,15 +102,15 @@ public class EmployeeDAO extends DAOProperty{
 					DeptBean deptBean = new DeptBean(deptId,deptName);
 					employeeBean.setDept(deptBean);
 				}
-			}if(employeeBean.getEmpName()==null){
-				return false;
 			}
-		} catch (SQLException e) {
+
+		}catch (SQLException e) {
 			e.printStackTrace();
 			return false;
 		}
 		return true;
 
-	}
-}
 
+
+}
+}
