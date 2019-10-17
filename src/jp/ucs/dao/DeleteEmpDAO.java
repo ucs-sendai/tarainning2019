@@ -11,7 +11,7 @@ import jp.ucs.bean.EmployeeBean;
 import jp.ucs.constants.MessageConstants;
 import jp.ucs.exception.HrsmUcsDBException;
 
-public class DeleteEmpDAO extends DAOProperty  {
+public class DeleteEmpDAO extends BaseDAO {
 
 	/**
      * メソッド名：deleteEmp
@@ -19,7 +19,7 @@ public class DeleteEmpDAO extends DAOProperty  {
      * @param  deleteEmpList :削除選択された社員のリスト
      * @return true   :削除が成功したときに返す
      */
-    public boolean deleteEmp(List<EmployeeBean> deleteEmpList) throws HrsmUcsDBException{
+    public void deleteEmp(List<EmployeeBean> deleteEmpList) throws HrsmUcsDBException{
 
         //削除選択された社員のリストがない場合、例外を発生させる
         if (deleteEmpList == null || deleteEmpList.size() == 0) {
@@ -61,7 +61,7 @@ public class DeleteEmpDAO extends DAOProperty  {
             throw new HrsmUcsDBException(MessageConstants.DB_ERR01);
         }
 
-        return true;
+
     }
 
     /**

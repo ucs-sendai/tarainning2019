@@ -22,7 +22,7 @@ public class LoginLogic {
 	 */
 
 
-	public EmployeeBean loginCheck(EmployeeBean employee) throws HrsmUcsDBException{
+	public EmployeeBean loginCheck(EmployeeBean employee)throws HrsmUcsDBException{
 		EmployeeDAO empDAO = new EmployeeDAO();
 		EmployeeBean employeeBean = new EmployeeBean();
 		return employee;

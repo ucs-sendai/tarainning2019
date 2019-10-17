@@ -57,7 +57,9 @@ public class HaveLicenseServlet extends HttpServlet {
 		session.setAttribute("licenseDate", licenseDate);
 		session.setAttribute("license", license);
 
-		HaveLicenseRegisterLogic havelicence = new HaveLicenseRegisterLogic();
+
+		HaveLicenseRegisterLogic havelicense = new HaveLicenseRegisterLogic();
+
 
 		//フォワード
 		RequestDispatcher dispatcher = request.getRequestDispatcher(Constants.haveLicenseFin);

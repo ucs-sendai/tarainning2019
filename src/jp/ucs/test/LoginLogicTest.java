@@ -60,5 +60,12 @@ public class LoginLogicTest{
 
 	}
 
+	//ユーザID、パスワードに値を入力していないため、ログインできない
+	public void testLoginCheckError5() throws HrsmUcsDBException{
+		LoginLogic loginLogic = new LoginLogic();
+		EmployeeBean employee = new EmployeeBean("","");
+		loginLogic.loginCheck(employee);
+	}
+
 }
 

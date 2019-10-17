@@ -11,6 +11,8 @@ package jp.ucs.bean;
 import java.util.Map;
 
 public class EmployeeBean {
+	private String propertyId;
+	private String serialId;
 	private String empId;
 	private String empName;
 	private String ruby;
@@ -66,6 +68,17 @@ public class EmployeeBean {
 		this.entryDate = entryDate;
 		this.dept = dept;
 	}
+
+	public EmployeeBean(String propertyId,String serialId, String empName, String ruby,
+			String pass, String entryDate){
+		this.propertyId = propertyId;
+		this.serialId = serialId;
+		this.empName = empName;
+		this.ruby = ruby;
+		this.pass = pass;
+		this.entryDate = entryDate;
+
+			}
 
 	/**
 	 *メソッド名:getEmpId

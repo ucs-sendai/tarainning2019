@@ -72,7 +72,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
         LoginLogic bo = new LoginLogic();
 
         try{
-            boolean result = bo.loginExecute(employee);
+            boolean result = bo.loginCheck(employee) != null;
 
             //ログイン認証が成功した場合、管理者か一般かをsubstringで判別する
             if(result){

@@ -20,7 +20,7 @@
     <form action="/HrsmUcs/EntryMenu" method="post">
         <jsp:include page="/title.jsp"></jsp:include>
     </form>
-        <p>${errorMsg }</p>
+        <p>${errorMsg}</p>
     <jsp:include page="/footer.jsp"></jsp:include>
 </body>
 </html>
