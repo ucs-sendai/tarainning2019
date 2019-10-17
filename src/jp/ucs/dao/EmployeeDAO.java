@@ -65,7 +65,7 @@ public class EmployeeDAO extends DAOProperty{
 	 * @return employeeDAO.findByEmployee(employeeBean)
 	 */
 
-	public boolean findByEmployee(EmployeeBean employeeBean) throws HrsmUcsDBException{
+	public EmployeeBean findByEmployee(EmployeeBean employeeBean) throws HrsmUcsDBException{
 		try(Connection conn = DriverManager.getConnection(DB_URL, DB_ID, PWD)){
 
 			//SQL文の準備
@@ -105,10 +105,9 @@ public class EmployeeDAO extends DAOProperty{
 			}
 
 		}catch (SQLException e) {
-			e.printStackTrace();
-			return false;
+			e.printStackTrace();;
 		}
-		return true;
+		return employeeBean;
 
 
 
