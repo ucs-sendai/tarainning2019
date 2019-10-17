@@ -107,9 +107,8 @@ public class EmployeeDAO extends DAOProperty{
 		}catch (SQLException e) {
 			e.printStackTrace();;
 		}
+		
 		return employeeBean;
-
-
 
 }
 }
