@@ -3,6 +3,7 @@ package jp.ucs.logic;
 import jp.ucs.bean.EmployeeBean;
 import jp.ucs.dao.EmployeeDAO;
 import jp.ucs.exception.HrsmUcsDBException;
+
 /**
  * システム名：社員管理システム
  * クラス名  ：LoginLogic
@@ -21,11 +22,13 @@ public class LoginLogic {
 	 * @return  employeeDAO.findByEmployee(employeeBean)
 	 */
 
+	public boolean loginExecute(EmployeeBean employee) throws HrsmUcsDBException{
+		EmployeeDAO dao = new EmployeeDAO();
 
-	    public boolean loginExecute(EmployeeBean employee) throws HrsmUcsDBException{
-	        EmployeeDAO dao = new EmployeeDAO();
+		if(dao.findByEmployee(employee) == true){
 			return true;
-
-	    }
+		}else{
+			return false;
+		}
 	}
-
+}

@@ -11,6 +11,8 @@ package jp.ucs.bean;
 import java.util.Map;
 
 public class EmployeeBean {
+	private String propertyId;
+	private String serialId;
 	private String empId;
 	private String empName;
 	private String ruby;
@@ -31,9 +33,11 @@ public class EmployeeBean {
 	 * @param empId:社員ID
 	 * @param pass:ログインパスワード
 	 */
-	public EmployeeBean(String empId, String pass) {
+	public EmployeeBean(String empId,String propertyId,String serialId, String pass) {
 		this.empId = empId;
 		this.pass = pass;
+		this.propertyId = propertyId;
+		this.serialId = serialId;
 	}
 
 	/**
@@ -42,11 +46,13 @@ public class EmployeeBean {
 	 * @param empName:社員の名前
 	 * @param dept:部門IDと部門名
 	 */
+
 	public EmployeeBean(String empId, String empName, DeptBean dept) {
 		this.empId = empId;
 		this.empName = empName;
 		this.dept = dept;
 	}
+
 
 	/**
 	 *引数6つのコンストラクタ
@@ -74,6 +80,24 @@ public class EmployeeBean {
 	 */
 	public String getEmpId() {
 		return this.empId;
+	}
+
+	/**
+	 *メソッド名:getPropertyId
+	 * 説明:社員IDを返す
+	 *  @return propertyId
+	 */
+	public String getPropertyId() {
+		return this.propertyId;
+	}
+
+	/**
+	 *メソッド名:SerialId
+	 * 説明:社員IDを返す
+	 *  @return serialId
+	 */
+	public String getSerialId() {
+		return this.serialId;
 	}
 
 	/**
@@ -119,6 +143,33 @@ public class EmployeeBean {
 	 */
 	public DeptBean getDept() {
 		return this.dept;
+	}
+
+	/**
+	 * メソッド名:setEmpId
+	 * 説明:社員の名前を設定する
+	 * @param empId セットする empName:設定された社員のID
+	 */
+	public void setEmpId(String empId) {
+		this.empId = empId;
+	}
+
+	/**
+	 * メソッド名:setPropertyId
+	 * 説明:社員の名前を設定する
+	 * @param propertyId セットする propertyId:設定された社員のID
+	 */
+	public void setPropertyId(String propertyId) {
+		this.propertyId = propertyId;
+	}
+
+	/**
+	 * メソッド名:setSerialId
+	 * 説明:社員の名前を設定する
+	 * @param serialId セットする serialId:設定された社員のID
+	 */
+	public void setSerialId(String serialId) {
+		this.serialId = serialId;
 	}
 
 	/**

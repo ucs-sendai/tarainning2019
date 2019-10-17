@@ -8,9 +8,15 @@
  */
 package jp.ucs.bean;
 
+import java.util.List;
+
 public class LicenseBean {
 	private String licenseId;
 	private String licenseName;
+	private String id;
+	private String dept;
+	private String name;
+	private List license;
 
 	/**
 	 * 引数なしのコンストラクタ
@@ -30,6 +36,28 @@ public class LicenseBean {
 	}
 
 	/**
+	 *引数2つのコンストラクタ
+	 * @param licenseId:資格のID
+	 * @param licenseName:資格名
+	 */
+	public LicenseBean(String licenseId, List license) {
+		this.licenseId = licenseId;
+		this.license = license;
+	}
+
+	/**
+	 *引数4つのコンストラクタ
+	 * @param licenseId:資格のID
+	 * @param licenseName:資格名
+	 */
+	public LicenseBean(String id,String name,String dept, List license) {
+		this.id= id;
+		this.name = name;
+		this.dept = dept;
+		this.license = license;
+	}
+
+	/**
 	 *メソッド名:getLicenseId
 	 * 説明:資格IDを返す
 	 *  @return licenseId
@@ -45,6 +73,24 @@ public class LicenseBean {
 	 */
 	public String getLicenseName() {
 		return this.licenseName;
+	}
+
+	/**
+	 *メソッド名:getid
+	 * 説明:資格名を返す
+	 *  @return id
+	 */
+	public String getid() {
+		return this.id;
+	}
+
+	/**
+	 *メソッド名:getdept
+	 * 説明:資格名を返す
+	 *  @return dept
+	 */
+	public String getdept() {
+		return this.dept;
 	}
 
 }
