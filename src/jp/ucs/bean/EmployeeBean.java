@@ -13,7 +13,6 @@ import java.util.Map;
 public class EmployeeBean {
 	private String propertyId;
 	private String serialId;
-	private String empId;
 	private String empName;
 	private String ruby;
 	private String pass;
@@ -29,26 +28,28 @@ public class EmployeeBean {
 	}
 
 	/**
-	 *引数2つのコンストラクタ
-	 * @param empId:社員ID
+	 *引数3つのコンストラクタ
+	 * @param propertyId:社員IDの上4桁
+	 * @param serialId:社員IDの下4桁
 	 * @param pass:ログインパスワード
 	 */
-	public EmployeeBean(String empId,String propertyId,String serialId, String pass) {
-		this.empId = empId;
-		this.pass = pass;
+	public EmployeeBean(String propertyId,String serialId, String pass) {
 		this.propertyId = propertyId;
 		this.serialId = serialId;
+		this.pass = pass;
 	}
 
 	/**
-	 *引数3つのコンストラクタ
-	 * @param empId:社員ID
+	 *引数4つのコンストラクタ
+	 * @param propertyId:社員IDの上4桁
+	 * @param serialId:社員IDの下4桁
 	 * @param empName:社員の名前
 	 * @param dept:部門IDと部門名
 	 */
 
-	public EmployeeBean(String empId, String empName, DeptBean dept) {
-		this.empId = empId;
+	public EmployeeBean(String propertyId, String serialId,String empName, DeptBean dept) {
+		this.propertyId = propertyId;
+		this.serialId = serialId;
 		this.empName = empName;
 		this.dept = dept;
 	}
@@ -56,30 +57,23 @@ public class EmployeeBean {
 
 	/**
 	 *引数6つのコンストラクタ
-	 * @param empId:社員ID
+	 * @param propertyId:社員IDの上4桁
+	 * @param serialId:社員IDの下4桁
 	 * @param empName:社員の名前
 	 * @param ruby:社員の名前のふり
 	 * @param pass:ログインパスワード
 	 * @param entryDate:社員の入社年月日
 	 * @param dept:部門IDと部門名
 	 */
-	public EmployeeBean(String empId, String empName, String ruby,
+	public EmployeeBean(String propertyId,String serialId, String empName, String ruby,
 			String pass, String entryDate, DeptBean dept) {
-		this.empId = empId;
+		this.propertyId = propertyId;
+		this.serialId= serialId;
 		this.empName = empName;
 		this.ruby = ruby;
 		this.pass = pass;
 		this.entryDate = entryDate;
 		this.dept = dept;
-	}
-
-	/**
-	 *メソッド名:getEmpId
-	 * 説明:社員IDを返す
-	 *  @return empId
-	 */
-	public String getEmpId() {
-		return this.empId;
 	}
 
 	/**
@@ -143,15 +137,6 @@ public class EmployeeBean {
 	 */
 	public DeptBean getDept() {
 		return this.dept;
-	}
-
-	/**
-	 * メソッド名:setEmpId
-	 * 説明:社員の名前を設定する
-	 * @param empId セットする empName:設定された社員のID
-	 */
-	public void setEmpId(String empId) {
-		this.empId = empId;
 	}
 
 	/**

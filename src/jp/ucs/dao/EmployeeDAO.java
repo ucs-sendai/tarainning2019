@@ -24,21 +24,18 @@ public class EmployeeDAO extends BaseDAO{
 
 	public List<EmployeeBean> employeeFindPart(){
 		List<EmployeeBean> empList = new ArrayList<>();
-		//try (Connection conn = DriverManager.getConnection(DB_URL, DB_ID, PWD)) {
 		try (Connection conn = getConnection()) {
 			StringBuilder sb = new StringBuilder();
-			sb.append("select *");
-			sb.append("from employee;");
-			sb.append("select *");
-			sb.append("from dept;");
+			sb.append("select * ");
+			sb.append("from employee inner join dept ");
+			sb.append("on employee.dept_id = dept.dept_id ");
 			PreparedStatement pstmt = conn.prepareStatement(sb.toString());
 			ResultSet rs = pstmt.executeQuery();
 
 			//DBから情報を取り出し、インスタンスに格納
 			while (rs.next()) {
-				//String propertyId = rs.getString("property_id");
-				//String serialId = rs.getString("serial_id");
-				String empId = rs.getString("property_id") + rs.getString("serial_id");
+				String propertyId = rs.getString("property_id");
+				String serialId = rs.getString("serial_id");
 				String empName = rs.getString("emp_name");
 				String ruby = rs.getString("ruby");
 				String pass = rs.getString("pass");
@@ -46,7 +43,7 @@ public class EmployeeDAO extends BaseDAO{
 				String deptId = rs.getString("dept_id");
 				String deptName = rs.getString("dept_name");
 				DeptBean dept = new DeptBean(deptId,deptName);
-				EmployeeBean employeeBean = new EmployeeBean(empId,empName,ruby,pass,entryDate,dept);
+				EmployeeBean employeeBean = new EmployeeBean(propertyId,serialId,empName,ruby,pass,entryDate,dept);
 				empList.add(employeeBean);
 			}
 
@@ -63,21 +60,14 @@ public class EmployeeDAO extends BaseDAO{
 	 * @return employeeDAO.findByEmployee(employeeBean)
 	 */
 
-	public boolean findByEmployee(EmployeeBean employeeBean) throws HrsmUcsDBException{
-		//try(Connection conn = DriverManager.getConnection(DB_URL, DB_ID, PWD)){
+	public EmployeeBean findByEmployee(EmployeeBean employeeBean) throws HrsmUcsDBException{
 		try (Connection conn = getConnection()) {
-
-			//EmployeeBean empBean = new EmployeeBean();
-			//String property_id;
-			//String serial_id;
-			//String pass;
 
 			//SQL文の準備
 			StringBuilder sb = new StringBuilder();
 			sb.append("select * ");
 			sb.append("from employee inner join dept ");
 			sb.append("on employee.dept_id = dept.dept_id ");
-			//sb.append("where property_id = '?' and serial_id = '?' and pass = '?';");
 			sb.append("where ");
 			sb.append("property_id = '");
 			sb.append(employeeBean.getPropertyId());
@@ -95,34 +85,29 @@ public class EmployeeDAO extends BaseDAO{
 			PreparedStatement pStmt = conn.prepareStatement(sb.toString());
 			ResultSet rs = pStmt.executeQuery();
 
-			//pStmt.setString(1, employeeBean.getEmpId());
-			//while(rs.next()){
-			//String empId = employeeBean.getPropertyId()+ employeeBean.getSerialId();
-			//pStmt.setString(1,employeeBean.getPropertyId()+ employeeBean.getSerialId());
-			//pStmt.setString(2,employeeBean.getPass());
-
 			//社員情報をインスタンスに追加
 			while(rs.next()) {
+
+				String propertyId = rs.getString("property_id");
+				employeeBean.setPropertyId(propertyId);
+				String serialId = rs.getString("serial_id");
+				employeeBean.setSerialId(serialId);
 				String empName=rs.getString("emp_name");
 				employeeBean.setEmpName(empName);
-				if(!employeeBean.getPropertyId().equals("0000")){
-					String ruby=rs.getString("ruby");
-					employeeBean.setRuby(ruby);
-					String entryDate=rs.getString("entry_date");
-					employeeBean.setEntryDate(entryDate);
-					String deptId = rs.getString("dept_id");
-					String deptName = rs.getString("dept_name");
-					DeptBean deptBean = new DeptBean(deptId,deptName);
-					employeeBean.setDept(deptBean);
-					//				}
-				}
-			}if(employeeBean.getEmpName() == null){
-				return false;
+				String ruby=rs.getString("ruby");
+				employeeBean.setRuby(ruby);
+				String entryDate=rs.getString("entry_date");
+				employeeBean.setEntryDate(entryDate);
+				String deptId = rs.getString("dept_id");
+				String deptName = rs.getString("dept_name");
+				DeptBean deptBean = new DeptBean(deptId,deptName);
+				employeeBean.setDept(deptBean);
+
 			}
-		} catch (SQLException e) {
+		}catch(SQLException e){
 			e.printStackTrace();
-			return false;
+			return null;
 		}
-		return true;
+		return employeeBean;
 	}
 }

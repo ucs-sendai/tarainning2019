@@ -36,7 +36,7 @@ public class EntryMenuServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		EmployeeBean employee = (EmployeeBean) session.getAttribute("employee");
 
-		if(employee.getEmpId().substring(0,4).equals("0000")){
+		if(employee.getPropertyId().equals("0000")){
 			RequestDispatcher dispatcher =
 					request.getRequestDispatcher(Constants.admin);
 			dispatcher.forward(request,response);
@@ -55,14 +55,9 @@ public class EntryMenuServlet extends HttpServlet {
 		String empId = request.getParameter("emp_id");
 		String pass = request.getParameter("pass");
 
-		String propertyId = empId.substring(0,4);
-		String serialId = empId.substring(4,8);
 
 		String msg = "";
 		String path = "";
-
-
-
 
 		if (empId.equals("") || pass.equals("") || empId.length() != 8) {
 			msg = MessageConstants.LOGIN_ERR;
@@ -70,16 +65,21 @@ public class EntryMenuServlet extends HttpServlet {
 			path = Constants.login;
 
 		}
+
+		String propertyId = empId.substring(0,4);
+		String serialId = empId.substring(4,8);
+
 		//EmployeeBean型のインスタンスを作成し、それを引数にLoginLogicを実行(BO)
-		EmployeeBean employee = new EmployeeBean(empId,propertyId,serialId,pass);
+		EmployeeBean employee = new EmployeeBean(propertyId,serialId,pass);
 		LoginLogic bo = new LoginLogic();
+
 
 		try{
 			boolean result = bo.loginExecute(employee);
 
 			//ログイン認証が成功した場合、管理者か一般かをsubstringで判別する
 			////先頭4桁が"0000"の場合、管理者メニューにフォワード
-			if(result == true && empId.substring(0,4).equals("0000")){
+			if(result == true && propertyId.equals("0000")){
 				HttpSession session = request.getSession();
 				session.setAttribute("employee", employee);
 				path = Constants.admin;
@@ -89,7 +89,7 @@ public class EntryMenuServlet extends HttpServlet {
 				dispatcher.forward(request,response);
 			}
 			////先頭4桁が"0000"でない場合、一般メニューにフォワード
-			else if(result == true){
+			else if(result == true && !(propertyId).equals("0000")){
 				HttpSession session = request.getSession();
 				session.setAttribute("employee", employee);
 				path = Constants.general;
@@ -99,6 +99,7 @@ public class EntryMenuServlet extends HttpServlet {
 				dispatcher.forward(request,response);
 
 				//ログイン認証が成功しなかった場合、login.jspにフォワード
+
 			}else{
 				msg = MessageConstants.LOGIN_ERR;
 				request.setAttribute("errorMsg",msg);
@@ -114,6 +115,10 @@ public class EntryMenuServlet extends HttpServlet {
 			msg = MessageConstants.DB_ERR01;
 			request.setAttribute("errorMsg",msg);
 			path =Constants.error;
+
+			RequestDispatcher dispatcher =
+					request.getRequestDispatcher(path);
+			dispatcher.forward(request,response);
 		}
 
 	}
