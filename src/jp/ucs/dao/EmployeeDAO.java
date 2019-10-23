@@ -85,29 +85,33 @@ public class EmployeeDAO extends BaseDAO{
 			PreparedStatement pStmt = conn.prepareStatement(sb.toString());
 			ResultSet rs = pStmt.executeQuery();
 
+			//追加するためのインスタンスを生成
+			EmployeeBean EmpInfo = new EmployeeBean();
+
 			//社員情報をインスタンスに追加
 			while(rs.next()) {
 
 				String propertyId = rs.getString("property_id");
-				employeeBean.setPropertyId(propertyId);
+				EmpInfo.setPropertyId(propertyId);
 				String serialId = rs.getString("serial_id");
-				employeeBean.setSerialId(serialId);
+				EmpInfo.setSerialId(serialId);
 				String empName=rs.getString("emp_name");
-				employeeBean.setEmpName(empName);
+				EmpInfo.setEmpName(empName);
 				String ruby=rs.getString("ruby");
-				employeeBean.setRuby(ruby);
+				EmpInfo.setRuby(ruby);
 				String entryDate=rs.getString("entry_date");
-				employeeBean.setEntryDate(entryDate);
+				EmpInfo.setEntryDate(entryDate);
 				String deptId = rs.getString("dept_id");
 				String deptName = rs.getString("dept_name");
 				DeptBean deptBean = new DeptBean(deptId,deptName);
-				employeeBean.setDept(deptBean);
-
+				EmpInfo.setDept(deptBean);
 			}
+
+			return EmpInfo;
+
 		}catch(SQLException e){
 			e.printStackTrace();
 			return null;
 		}
-		return employeeBean;
 	}
 }

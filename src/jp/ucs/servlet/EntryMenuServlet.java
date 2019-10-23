@@ -55,7 +55,6 @@ public class EntryMenuServlet extends HttpServlet {
 		String empId = request.getParameter("emp_id");
 		String pass = request.getParameter("pass");
 
-
 		String msg = "";
 		String path = "";
 
@@ -71,15 +70,16 @@ public class EntryMenuServlet extends HttpServlet {
 
 		//EmployeeBean型のインスタンスを作成し、それを引数にLoginLogicを実行(BO)
 		EmployeeBean employee = new EmployeeBean(propertyId,serialId,pass);
-		LoginLogic bo = new LoginLogic();
 
+		//Logicクラスのインスタンスの生成
+		LoginLogic loginLogic = new LoginLogic();
 
 		try{
-			boolean result = bo.loginExecute(employee);
+			boolean result = loginLogic.loginExecute(employee);
 
-			//ログイン認証が成功した場合、管理者か一般かをsubstringで判別する
-			////先頭4桁が"0000"の場合、管理者メニューにフォワード
-			if(result == true && propertyId.equals("0000")){
+			//ログイン認証が成功した場合、管理者か一般かを判別する
+			////propertyが"0000"の場合、管理者メニューにフォワード
+			if(result && propertyId.equals("0000")){
 				HttpSession session = request.getSession();
 				session.setAttribute("employee", employee);
 				path = Constants.admin;
@@ -88,8 +88,9 @@ public class EntryMenuServlet extends HttpServlet {
 						request.getRequestDispatcher(path);
 				dispatcher.forward(request,response);
 			}
-			////先頭4桁が"0000"でない場合、一般メニューにフォワード
-			else if(result == true && !(propertyId).equals("0000")){
+
+			//resultがtrueでpropertyIdが"0000"でない場合、一般メニューにフォワード
+			else if(result && !(propertyId).equals("0000")){
 				HttpSession session = request.getSession();
 				session.setAttribute("employee", employee);
 				path = Constants.general;

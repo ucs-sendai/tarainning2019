@@ -54,7 +54,6 @@ public class EmployeeBean {
 		this.dept = dept;
 	}
 
-
 	/**
 	 *引数6つのコンストラクタ
 	 * @param propertyId:社員IDの上4桁

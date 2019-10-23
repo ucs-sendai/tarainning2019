@@ -21,6 +21,7 @@ public class SampleLogicTest {
 		SampleLogic logic = new SampleLogic();
 		assertNotEquals(1, logic.sample(1));
 	}
+	
 
 	//異常系（NULLぽ発生）
 	@Test(expected = NullPointerException.class)
