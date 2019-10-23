@@ -24,11 +24,10 @@ public class LoginLogic {
 
 	public boolean loginCheck(EmployeeBean employee)throws HrsmUcsDBException{
 		EmployeeDAO empDAO = new EmployeeDAO();
-		EmployeeBean employeeBean = new EmployeeBean();
-		if(empDAO.findByEmployee(employeeBean)== null){
-			return false;
-		}
-		return true;
+		EmployeeBean empBean = empDAO.findByEmployee(employee);
+
+		return empBean.getEmpName()!= null;
+    }
 	}
-}
+
 
