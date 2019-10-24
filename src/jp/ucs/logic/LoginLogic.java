@@ -22,10 +22,9 @@ public class LoginLogic {
 	 * @return  employeeDAO.findByEmployee(employeeBean)
 	 */
 
-	public boolean loginExecute(EmployeeBean empInfo) throws HrsmUcsDBException{
-		
-		
-		
+	public boolean loginCheck(EmployeeBean empInfo) throws HrsmUcsDBException{
+
+
 		//daoクラスの初期化
 		EmployeeDAO dao = new EmployeeDAO();
 
@@ -34,7 +33,7 @@ public class LoginLogic {
 
 		//社員情報があればtrueを返す
 		//社員情報がnullだったらfalseを返す
-		
+
 		return rsltEmpInfo.getPropertyId() != null;
 
 	}

@@ -11,72 +11,51 @@ import jp.ucs.logic.LoginLogic;
 public class LoginLogicTest{
 
 	//正常処理
-	//ログインできる(管理者として)
+	//ログイン可能
 	@Test
 	public void testLoginExecute1() throws HrsmUcsDBException{
 		EmployeeBean empBean = new EmployeeBean("0000","0001","a15263389");
 		LoginLogic loginLogic = new LoginLogic();
-		assertTrue(loginLogic.loginExecute(empBean));
+		assertTrue(loginLogic.loginCheck(empBean));
 	}
 
 	//正常処理
-	//ログインできる(一般ユーザーとして)
+	//ログイン不可
+	//ID:X PASS:X
 	@Test
 	public void testLoginExecute2() throws HrsmUcsDBException {
-		EmployeeBean empBean = new EmployeeBean("2019","0001","00000000");
-		LoginLogic loginLogic = new LoginLogic();
-		assertTrue(loginLogic.loginExecute(empBean));
-	}
-
-	//正常処理
-	//ログインできない
-	@Test
-	public void testLoginExecute3() throws HrsmUcsDBException {
 		EmployeeBean empBean = new EmployeeBean("1111","1111","12345678");
 		LoginLogic loginLogic = new LoginLogic();
-		assertFalse(loginLogic.loginExecute(empBean));
+		assertFalse(loginLogic.loginCheck(empBean));
 	}
 	//正常処理
-	//ログインできない(管理者として)
+	//ログイン不可
 	//ID:〇 PASS:X
-	public void testLoginExecute4() throws HrsmUcsDBException {
+	@Test
+	public void testLoginExecute3() throws HrsmUcsDBException {
 		EmployeeBean empBean = new EmployeeBean("0000","0001","12345678");
 		LoginLogic loginLogic = new LoginLogic();
-		assertFalse(loginLogic.loginExecute(empBean));
+		assertFalse(loginLogic.loginCheck(empBean));
 	}
 
 	//正常処理
-	//ログインできない(管理者として)
+	//ログイン不可
 	//ID:X PASS:〇
-	public void testLoginExecute5() throws HrsmUcsDBException {
+	@Test
+	public void testLoginExecute4() throws HrsmUcsDBException {
 		EmployeeBean empBean = new EmployeeBean("0000","1234","a15263389");
 		LoginLogic loginLogic = new LoginLogic();
-		assertFalse(loginLogic.loginExecute(empBean));
-	}
-
-	//正常処理
-	//ログインできない(一般ユーザーとして)
-	//ID:〇 PASS:X
-	public void testLoginExecute6() throws HrsmUcsDBException {
-		EmployeeBean empBean = new EmployeeBean("2019","0001","11111111");
-		LoginLogic loginLogic = new LoginLogic();
-		assertFalse(loginLogic.loginExecute(empBean));
-	}
-
-	//正常処理
-	//ログインできない(一般ユーザーとして)
-	//ID:X PASS:〇
-	public void testLoginExecute7() throws HrsmUcsDBException {
-		EmployeeBean empBean = new EmployeeBean("2019","1234","00000000");
-		LoginLogic loginLogic = new LoginLogic();
-		assertFalse(loginLogic.loginExecute(empBean));
+		assertFalse(loginLogic.loginCheck(empBean));
 	}
 
 	//異常処理
-	//入力値がnullの場合
-	@Test
+	//HrsmUcsDBExceptionの発生
+	//DBの接続を切断して行うこと
+	@Test(expected = HrsmUcsDBException.class)
 	public void testErrorCheck1() throws HrsmUcsDBException{
+
+		EmployeeBean empBean = new EmployeeBean("0000","0001","a15263389");
 		LoginLogic loginLogic = new LoginLogic();
-		loginLogic.loginExecute(null);
+		assertFalse(loginLogic.loginCheck(empBean));
 	}
 }

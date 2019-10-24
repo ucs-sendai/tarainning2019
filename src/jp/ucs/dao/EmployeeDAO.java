@@ -20,7 +20,7 @@ import jp.ucs.exception.HrsmUcsDBException;
  * 作成日付：2019/07/10(水)
  */
 
-public class EmployeeDAO extends BaseDAO{
+public class EmployeeDAO extends BaseDAO {
 
 	public List<EmployeeBean> employeeFindPart(){
 		List<EmployeeBean> empList = new ArrayList<>();
@@ -62,6 +62,7 @@ public class EmployeeDAO extends BaseDAO{
 
 	public EmployeeBean findByEmployee(EmployeeBean employeeBean) throws HrsmUcsDBException{
 		try (Connection conn = getConnection()) {
+			//Connection conn = getConnection();
 
 			//SQL文の準備
 			StringBuilder sb = new StringBuilder();
@@ -110,8 +111,7 @@ public class EmployeeDAO extends BaseDAO{
 			return EmpInfo;
 
 		}catch(SQLException e){
-			e.printStackTrace();
-			return null;
+			throw new HrsmUcsDBException();
 		}
 	}
 }

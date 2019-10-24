@@ -24,5 +24,4 @@ public class HrsmUcsDBException extends Exception {
 	public HrsmUcsDBException(String errorMsg) {
 		super(errorMsg);
 	}
-
 }
