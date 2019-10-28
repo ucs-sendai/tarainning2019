@@ -1,7 +1,6 @@
 package jp.ucs.dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -23,7 +22,7 @@ public class DeptDAO extends BaseDAO  {
 
         		 Map<String, String> dept = new HashMap<>();
 
-        	        try (Connection conn = DriverManager.getConnection(DB_URL, DB_ID, PWD)) {
+        	        try (Connection conn = getConnection()) {
 
         	        	StringBuilder sb = new StringBuilder();
         	            sb.append("select dept_id,dept_name  from dept;");
