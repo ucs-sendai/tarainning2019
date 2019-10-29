@@ -43,14 +43,17 @@ public class LoginLogicTest{
 	@Test(expected = NullPointerException.class)
 	public void testLoginCheck4() throws HrsmUcsDBException{
 		LoginLogic loginLogic = new LoginLogic();
-		loginLogic.loginCheck(null);
+		assertFalse(loginLogic.loginCheck(null));
 	}
 
 	//異常系（DBエラー）
-	@Test
+	//DB切断してテストを行う
+
+	@Test(expected = HrsmUcsDBException.class)
 		public void testLoginCheck5() throws HrsmUcsDBException{
+
 		LoginLogic loginLogic = new LoginLogic();
-		EmployeeBean employee = new EmployeeBean("111111111","M0i6K2z5");
+		EmployeeBean employee = new EmployeeBean("11111111","M0i6K2z5");
 		assertFalse(loginLogic.loginCheck(employee));
 	}
 }
