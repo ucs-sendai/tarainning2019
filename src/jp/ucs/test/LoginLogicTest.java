@@ -38,23 +38,13 @@ public class LoginLogicTest{
 		assertFalse(loginLogic.loginCheck(employee));
 	}
 
-
-	//異常系（ユーザID、パスワードに値を入力していないため、ログインできない）
-	@Test(expected = NullPointerException.class)
-	public void testLoginCheck4() throws HrsmUcsDBException{
-		LoginLogic loginLogic = new LoginLogic();
-		assertFalse(loginLogic.loginCheck(null));
-	}
-
 	//異常系（DBエラー）
-	//DB切断してテストを行う
 
 	@Test(expected = HrsmUcsDBException.class)
-		public void testLoginCheck5() throws HrsmUcsDBException{
+		public void testLoginCheck4() throws HrsmUcsDBException{
 
 		LoginLogic loginLogic = new LoginLogic();
-		EmployeeBean employee = new EmployeeBean("11111111","M0i6K2z5");
-		assertFalse(loginLogic.loginCheck(employee));
+		assertFalse(loginLogic.loginCheck(null));
 	}
 }
 
