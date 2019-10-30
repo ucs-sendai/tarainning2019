@@ -27,7 +27,7 @@ jspファイル名 ：registerFin
 	<h1>登録完了</h1>
 	<h3>
 		社員ID :
-		<c:out value="${empId}"></c:out>
+		<c:out value="${registerEmp.empId}"></c:out>
 
 		<c:out value="${registerEmp.empName}"></c:out>
 		さん

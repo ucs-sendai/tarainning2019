@@ -46,4 +46,14 @@ public class DeptBean {
 	public String getDeptName() {
 		return this.deptName;
 	}
+
+
+
+	public void setDeptId(String deptId) {
+		this.deptId = deptId;
+	}
+
+	public void setDeptName(String deptName) {
+		this.deptName = deptName;
+	}
 }

@@ -13,10 +13,12 @@ import java.util.Map;
 public class EmployeeBean {
 	private String propertyId;
 	private String serialId;
+	private String empId;
 	private String empName;
 	private String ruby;
 	private String pass;
 	private String entryDate;
+	//private EmployeeBean emp;
 	private DeptBean dept;
 	private Map<LicenseBean, String> licenses;
 
@@ -28,16 +30,41 @@ public class EmployeeBean {
 	}
 
 	/**
+	 *引数2つのコンストラクタ
+	 * @param empId:社員ID
+	 * @param empName:社員名
+	 */
+	public EmployeeBean(String empId, String empName) {
+		this.empId = empId;
+		this.empName = empName;
+	}
+
+
+
+	/**
 	 *引数3つのコンストラクタ
 	 * @param propertyId:社員IDの上4桁
 	 * @param serialId:社員IDの下4桁
-	 * @param pass:ログインパスワード
+	 * @param registerEmp:ログインパスワード
 	 */
 	public EmployeeBean(String propertyId,String serialId, String pass) {
 		this.propertyId = propertyId;
 		this.serialId = serialId;
 		this.pass = pass;
 	}
+
+	/**
+	 *引数3つのコンストラクタ
+	 * @param propertyId:社員IDの上4桁
+	 * @param serialId:社員IDの下4桁
+	 * @param emp:社員情報
+	 */
+
+	//public EmployeeBean(String propertyId,String serialId) {
+	//this.propertyId = propertyId;
+	//this.serialId = serialId;
+	//}
+
 
 	/**
 	 *引数4つのコンストラクタ
@@ -55,7 +82,26 @@ public class EmployeeBean {
 	}
 
 	/**
-	 *引数6つのコンストラクタ
+	 *引数5つのコンストラクタ
+	 * @param name:社員名前
+	 * @param ruby:社員の名前のふりがな
+	 * @param pass:パスワード
+	 * @param dept:部門ID
+	 * @param entryDate:入社年月日
+	 */
+
+	public EmployeeBean( String empName, String ruby, DeptBean dept,
+			String pass,String entryDate) {
+		this.empName = empName;
+		this.ruby = ruby;
+		this.dept = dept;
+		this.pass = pass;
+		this.entryDate = entryDate;
+	}
+
+
+	/**
+	 *引数7つのコンストラクタ
 	 * @param propertyId:社員IDの上4桁
 	 * @param serialId:社員IDの下4桁
 	 * @param empName:社員の名前
@@ -92,6 +138,16 @@ public class EmployeeBean {
 	public String getSerialId() {
 		return this.serialId;
 	}
+
+	/**
+	 *メソッド名:empId
+	 * 説明:社員IDを返す
+	 *  @return empId
+	 */
+	public String getEmpId() {
+		return this.empId;
+	}
+
 
 	/**
 	 *メソッド名:getEmpName
@@ -145,6 +201,15 @@ public class EmployeeBean {
 	 */
 	public void setPropertyId(String propertyId) {
 		this.propertyId = propertyId;
+	}
+
+	/**
+	 * メソッド名:setEmpId
+	 * 説明:社員の名前を設定する
+	 * @param empId セットする empId:設定された社員のID
+	 */
+	public void setEmpId(String empId) {
+		this.empId = empId;
 	}
 
 	/**

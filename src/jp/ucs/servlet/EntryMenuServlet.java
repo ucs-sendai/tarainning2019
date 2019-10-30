@@ -55,6 +55,7 @@ public class EntryMenuServlet extends HttpServlet {
 		String empId = request.getParameter("emp_id");
 		String pass = request.getParameter("pass");
 
+		//初期化
 		String msg = "";
 		String path = "";
 
@@ -65,6 +66,7 @@ public class EntryMenuServlet extends HttpServlet {
 
 		}
 
+		//取得したempIdをpropertyIdとserialIdに分ける
 		String propertyId = empId.substring(0,4);
 		String serialId = empId.substring(4,8);
 
@@ -119,7 +121,7 @@ public class EntryMenuServlet extends HttpServlet {
 			RequestDispatcher dispatcher =
 					request.getRequestDispatcher(path);
 			dispatcher.forward(request,response);
-		}
+		} 
 
 	}
 }

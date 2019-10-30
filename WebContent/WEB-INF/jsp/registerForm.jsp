@@ -37,7 +37,7 @@ jspファイル名 ：registerForm
 			</tr>
 
 			<tr>
-				<td>　</td>
+				<td></td>
 				<c:if test="${not empty errorMsg1 }">
 
 					<td style="text-align: left"><font color="#EE0000">(${errorMsg1})</font></td>
@@ -51,7 +51,7 @@ jspファイル名 ：registerForm
 			</tr>
 
 			<tr>
-				<td>　</td>
+				<td></td>
 				<c:if test="${not empty errorMsg2 }">
 
 					<td style="text-align: left"><font color="#EE0000">(${errorMsg2})
@@ -64,15 +64,19 @@ jspファイル名 ：registerForm
 				<th>部門</th>
 
 				<td><select name="dept" size="1">
-						<option value = "null"></option>
+						<option value="null"></option>
+
+						<%--
 						<option value="zaimu">管理本部経理財務</option>
 						<option value="kannrikikaku">管理本部営業企画</option>
-						<option value="eikikaku">営業部営業企画</option>
+						<option value="eigyokikaku">営業部営業企画</option>
 						<option value="syougai">営業部渉外</option>
-						<option value="zaimu">システム本部金融</option>
+						<option value="system">システム本部金融</option>
 						<option value="sangyou">システム本部産業</option>
 						<option value="osaka">大阪事業所</option>
 						<option value="sendai">仙台事業所</option>
+						--%>
+
 						<c:forEach var="dept" items="${deptMap}">
 							<option value="${dept.key}">${dept.value}</option>
 						</c:forEach>
@@ -80,7 +84,7 @@ jspファイル名 ：registerForm
 			</tr>
 
 			<tr>
-				<td>　</td>
+				<td></td>
 				<c:if test="${not empty errorMsg3 }">
 					<td style="text-align: left"><font color="#EE0000">(${errorMsg3})
 					</font></td>
@@ -95,7 +99,7 @@ jspファイル名 ：registerForm
 			</tr>
 
 			<tr>
-				<td>　</td>
+				<td></td>
 				<c:if test="${not empty errorMsg4 }">
 					<td style="text-align: left"><font color="#EE0000">(${errorMsg4})
 					</font></td>
@@ -110,7 +114,7 @@ jspファイル名 ：registerForm
 			</tr>
 
 			<tr>
-				<td>　</td>
+				<td></td>
 				<c:if test="${not empty errorMsg5}">
 					<td style="text-align: left"><font color="#EE0000">(${errorMsg5})
 					</font></td>
@@ -118,7 +122,7 @@ jspファイル名 ：registerForm
 			</tr>
 
 			<tr>
-				<td>　</td>
+				<td></td>
 				<td align="center"><input type="submit" value="登録"></td>
 			</tr>
 		</table>
@@ -126,10 +130,3 @@ jspファイル名 ：registerForm
 	<br><jsp:include page="/footer.jsp"></jsp:include>
 </body>
 </html>
-
-
-
-
-
-
-
