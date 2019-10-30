@@ -25,7 +25,7 @@ public final class Constants {
 	public static final String delete_emp_result = "/WEB-INF/jsp/deleteEmpResult.jsp";
 	public static final String delete_emp_confirm = "/WEB-INF/jsp/deleteEmpConfirm.jsp";
 	public static final String search_main = "/WEB-INF/jsp/searchMain.jsp";
-	public static final String haveLicenseRegister ="/WEB-INF/jsp/haveLicenseRegister.jsp";
-	public static final String haveLicenseFin ="/WEB-INF/jsp/haveLicenseFin.jsp";
-	public static final String haveLicenseSelect ="/WEB-INF/jsp/haveLicenseSelect.jsp";
+	public static final String have_license_register ="/WEB-INF/jsp/haveLicenseRegister.jsp";
+	public static final String have_license_fin ="/WEB-INF/jsp/haveLicenseFin.jsp";
+	public static final String have_license_select ="/WEB-INF/jsp/haveLicenseSelect.jsp";
 }
