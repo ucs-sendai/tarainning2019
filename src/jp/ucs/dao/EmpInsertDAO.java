@@ -15,7 +15,7 @@ import jp.ucs.exception.HrsmUcsDBException;
 
 public class EmpInsertDAO extends BaseDAO {
 
-	public String employeeFindPart() throws HrsmUcsDBException, NullPointerException {
+	public String employeeFindPart() throws HrsmUcsDBException {
 
 		// serialIdを入れる変数を用意
 		String serialId = null;
@@ -37,20 +37,18 @@ public class EmpInsertDAO extends BaseDAO {
 			}
 		} catch (SQLException e) {
 			throw new HrsmUcsDBException();
-		} catch (NullPointerException e) {
-
 		}
 		return serialId;
 	}
 
 	/**
 	 * メソッド名:registerEmp 説明: 社員情報を登録する。
-	 * 
+	 *
 	 * @param: registerEmp
 	 * @return true
 	 */
 
-	public EmployeeBean registerEmp(EmployeeBean EmpInfo) throws HrsmUcsDBException, NullPointerException {
+	public EmployeeBean registerEmp(EmployeeBean EmpInfo) throws HrsmUcsDBException {
 		// DB接続
 		try (Connection conn = getConnection()) {
 			// SQL文の準備
@@ -62,32 +60,31 @@ public class EmpInsertDAO extends BaseDAO {
 			sb.append("values( ");
 			sb.append("'");
 			sb.append(EmpInfo.getPropertyId());
-			sb.append("'");
-			sb.append(", ");
+			sb.append("' , ");
+			// sb.append(", ");
 			sb.append("'");
 			sb.append(EmpInfo.getSerialId());
-			sb.append("'");
-			sb.append(", ");
+			sb.append("' , ");
+			// sb.append(", ");
 			sb.append("'");
 			sb.append(EmpInfo.getEmpName());
-			sb.append("'");
-			sb.append(", ");
+			sb.append("' , ");
+			// sb.append(", ");
 			sb.append("'");
 			sb.append(EmpInfo.getRuby());
-			sb.append("'");
-			sb.append(", ");
+			sb.append("' , ");
+			// sb.append(", ");
 			sb.append("'");
 			sb.append(EmpInfo.getPass());
-			sb.append("'");
-			sb.append(", ");
+			sb.append("' , ");
+			// sb.append(", ");
 			sb.append("'");
 			sb.append(EmpInfo.getEntryDate());
-			sb.append("'");
-			sb.append(", ");
+			sb.append("' , ");
+			// sb.append(", ");
 			sb.append("'");
 			sb.append(EmpInfo.getDept().getDeptId());
-			sb.append("'");
-			sb.append("); ");
+			sb.append("'); ");
 
 			// insert文の実行
 			PreparedStatement pStmt = conn.prepareStatement(sb.toString());

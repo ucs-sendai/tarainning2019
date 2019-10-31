@@ -28,21 +28,28 @@ jspファイル名 ：registerForm
 	<h1>社員登録</h1>
 
 	<form action="/Hrsm/RegisterEmp" method="post">
+
+
+		<tr>
+			<c:if test="${not empty errorMsg}">
+				<c:forEach var="errorMsg" items="${errorMsg}">
+					<p style="text-align: left">
+						<font color="#EE0000">(${errorMsg})</font>
+					</p>
+				</c:forEach>
+
+			</c:if>
+
+		</tr>
+
 		<table>
-			<tr>
-				<th>氏名</th>
 
-				<td><input type="text" name="empName"
-					value="${registerEmp.empName}"></td>
+			<th>氏名</th>
+
+			<td><input type="text" name="empName"
+				value="${registerEmp.empName}"></td>
 			</tr>
 
-			<tr>
-				<td></td>
-				<c:if test="${not empty errorMsg1 }">
-
-					<td style="text-align: left"><font color="#EE0000">(${errorMsg1})</font></td>
-				</c:if>
-			</tr>
 
 			<tr>
 				<th>ふりがな</th>
@@ -51,44 +58,15 @@ jspファイル名 ：registerForm
 			</tr>
 
 			<tr>
-				<td></td>
-				<c:if test="${not empty errorMsg2 }">
-
-					<td style="text-align: left"><font color="#EE0000">(${errorMsg2})
-					</font></td>
-				</c:if>
-			</tr>
-
-
-			<tr>
 				<th>部門</th>
 
 				<td><select name="dept" size="1">
 						<option value="null"></option>
 
-						<%--
-						<option value="zaimu">管理本部経理財務</option>
-						<option value="kannrikikaku">管理本部営業企画</option>
-						<option value="eigyokikaku">営業部営業企画</option>
-						<option value="syougai">営業部渉外</option>
-						<option value="system">システム本部金融</option>
-						<option value="sangyou">システム本部産業</option>
-						<option value="osaka">大阪事業所</option>
-						<option value="sendai">仙台事業所</option>
-						--%>
-
 						<c:forEach var="dept" items="${deptMap}">
 							<option value="${dept.key}">${dept.value}</option>
 						</c:forEach>
 				</select></td>
-			</tr>
-
-			<tr>
-				<td></td>
-				<c:if test="${not empty errorMsg3 }">
-					<td style="text-align: left"><font color="#EE0000">(${errorMsg3})
-					</font></td>
-				</c:if>
 			</tr>
 
 			<tr>
@@ -99,26 +77,10 @@ jspファイル名 ：registerForm
 			</tr>
 
 			<tr>
-				<td></td>
-				<c:if test="${not empty errorMsg4 }">
-					<td style="text-align: left"><font color="#EE0000">(${errorMsg4})
-					</font></td>
-				</c:if>
-			</tr>
-
-			<tr>
 				<th>入社年月日</th>
 
 				<td><input type="text" name="entryDate"
 					placeholder="yyyy/MM/dd" value="${registerEmp.entryDate }"></td>
-			</tr>
-
-			<tr>
-				<td></td>
-				<c:if test="${not empty errorMsg5}">
-					<td style="text-align: left"><font color="#EE0000">(${errorMsg5})
-					</font></td>
-				</c:if>
 			</tr>
 
 			<tr>

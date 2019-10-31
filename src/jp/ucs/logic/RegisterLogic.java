@@ -1,6 +1,9 @@
 package jp.ucs.logic;
 
+import java.util.ArrayList;
+
 import jp.ucs.bean.EmployeeBean;
+import jp.ucs.constants.MessageConstants;
 import jp.ucs.dao.EmpInsertDAO;
 import jp.ucs.exception.HrsmUcsDBException;
 
@@ -10,6 +13,7 @@ import jp.ucs.exception.HrsmUcsDBException;
  */
 
 public class RegisterLogic {
+
 	public boolean registerExecute(EmployeeBean registerEmp) throws HrsmUcsDBException {
 
 		// daoクラスの生成
@@ -34,5 +38,34 @@ public class RegisterLogic {
 
 		// EmpInsertDAOの結果を判定
 		return insertEmp.getEmpId() != null;
+	}
+
+	// 入力チェック
+	public ArrayList checkEmp(EmployeeBean EmpList) {
+
+		ArrayList<String> arrayList = new ArrayList<String>();
+
+		// 受け取った値の入力チェック
+		if (EmpList.getEmpName().equals("") || EmpList.getEmpName().length() > 30) {
+			arrayList.add(MessageConstants.REGEMP_ERR01);
+		}
+
+		if ((EmpList.getRuby().equals("") || EmpList.getRuby().length() > 40)) {
+			arrayList.add(MessageConstants.REGEMP_ERR02);
+		}
+
+		if (EmpList.getDept().getDeptId().equals("null")) {
+			arrayList.add(MessageConstants.REGEMP_ERR03);
+		}
+
+		if (EmpList.getPass().equals("") || EmpList.getPass().length() > 16 || EmpList.getPass().length() < 8) {
+			arrayList.add(MessageConstants.REGEMP_ERR04);
+		}
+
+		if (EmpList.getEntryDate().equals("") || EmpList.getEntryDate().length() != 10) {
+			arrayList.add(MessageConstants.REGEMP_ERR05);
+		}
+
+		return arrayList;
 	}
 }

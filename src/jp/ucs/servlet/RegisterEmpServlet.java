@@ -1,6 +1,7 @@
 package jp.ucs.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
@@ -59,7 +60,9 @@ public class RegisterEmpServlet extends HttpServlet {
 				dispatcher.forward(request, response);
 
 			} catch (HrsmUcsDBException e) {
-				e.printStackTrace();
+
+				RequestDispatcher dispatcher = request.getRequestDispatcher(Constants.db_error);
+				dispatcher.forward(request, response);
 			}
 
 		}
@@ -79,12 +82,12 @@ public class RegisterEmpServlet extends HttpServlet {
 
 				// HrmsUcsDBExceptionがスローされたらキャッチしてdbError.jspにフォワード
 			} catch (HrsmUcsDBException e) {
-				RequestDispatcher dispatcher = request.getRequestDispatcher(Constants.register_form);
+				RequestDispatcher dispatcher = request.getRequestDispatcher(Constants.db_error);
 				dispatcher.forward(request, response);
 			}
 
 			// 例外が出なければregisterFin.jspにフォワード
-			RequestDispatcher dispatcher = request.getRequestDispatcher(Constants.register_form);
+			RequestDispatcher dispatcher = request.getRequestDispatcher(Constants.register_fin);
 			dispatcher.forward(request, response);
 
 		}
@@ -100,6 +103,8 @@ public class RegisterEmpServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		ArrayList<String> errorMsg = new ArrayList<String>();
+
 		// JSPから登録したい社員情報を取得
 		request.setCharacterEncoding("UTF-8");
 		String empName = request.getParameter("empName");
@@ -108,80 +113,60 @@ public class RegisterEmpServlet extends HttpServlet {
 		String pass = request.getParameter("pass");
 		String entryDate = request.getParameter("entryDate");
 
-		// メッセージの初期化
 		String msg = "";
-		String msg1 = "";
-		String msg2 = "";
-		String msg3 = "";
-		String msg4 = "";
-		String msg5 = "";
-		String path = "";
-
-		// 入力チェック(空欄と文字数の制限以内の確認)
-		if (empName.equals("") || empName.length() > 30) {
-			msg1 = MessageConstants.REGEMP_ERR01;
-			request.setAttribute("errorMsg1", msg1);
-		}
-
-		if (ruby.equals("") || ruby.length() > 40) {
-			msg2 = MessageConstants.REGEMP_ERR02;
-			request.setAttribute("errorMsg2", msg2);
-		}
-
-		if (deptId.equals("null")) {
-			msg3 = MessageConstants.REGEMP_ERR03;
-			request.setAttribute("errorMsg3", msg3);
-		}
-
-		if (pass.equals("") || pass.length() > 16) {
-			msg4 = MessageConstants.REGEMP_ERR04;
-			request.setAttribute("errorMsg4", msg4);
-		}
-
-		if (entryDate.equals("") || entryDate.length() != 10) {
-			msg5 = MessageConstants.REGEMP_ERR05;
-			request.setAttribute("errorMsg5", msg5);
-		}
-
-		// 入力項目に不備が見つかればエラーを表示
-		if (msg1 != null || msg2 != null || msg3 != null || msg4 != null || msg5 != null) {
-			RequestDispatcher dispatcher = request.getRequestDispatcher(Constants.register_form);
-			dispatcher.forward(request, response);
-
-		}
 
 		// EmployeeBean型のインスタンスを作成し、sessionスコープに登録
 		DeptBean dept = new DeptBean(deptId, "");
 
 		EmployeeBean registerEmp = new EmployeeBean(empName, ruby, dept, pass, entryDate);
 
-		HttpSession session = request.getSession();
-		session.setAttribute("registerEmp", registerEmp);
-
 		// logicクラスのインスタンスを生成
 		RegisterLogic logic = new RegisterLogic();
 
-		// 登録処理を実行
-		try {
-			boolean result = logic.registerExecute(registerEmp);
+		// 入力項目の不備チェック
+		errorMsg = logic.checkEmp(registerEmp);
 
-			if (true && msg1 == null || msg2 == null || msg3 == null || msg4 == null || msg5 == null) {
+		// 入力項目にエラーが生じたらエラーメッセージを表示
+		if (errorMsg.isEmpty() == false) {
 
-				// registerFin.jspにフォワード
-				RequestDispatcher dispatcher = request.getRequestDispatcher(Constants.register_fin);
+			// エラーメッセージをリクエストスコープに保存する
+			request.setAttribute("errorMsg", errorMsg);
+
+			// エラーメッセージを表示
+			RequestDispatcher dispatcher = request.getRequestDispatcher(Constants.register_form);
+			dispatcher.forward(request, response);
+
+		} else {
+
+			HttpSession session = request.getSession();
+			session.setAttribute("registerEmp", registerEmp);
+
+			// 登録処理を実行
+			try {
+				boolean resultEmp = logic.registerExecute(registerEmp);
+
+				if (resultEmp) {
+
+					// registerFin.jspにフォワード
+					RequestDispatcher dispatcher = request.getRequestDispatcher(Constants.register_fin);
+					dispatcher.forward(request, response);
+
+				} else {
+
+					RequestDispatcher dispatcher = request.getRequestDispatcher(Constants.register_form);
+					dispatcher.forward(request, response);
+
+				}
+				// DBエラーが生じた場合、エラー画面にフォワード
+
+			} catch (HrsmUcsDBException e) {
+				msg = MessageConstants.DB_ERR01;
+				request.setAttribute("errorMsg", MessageConstants.DB_ERR01);
+
+				RequestDispatcher dispatcher = request.getRequestDispatcher(Constants.error);
 				dispatcher.forward(request, response);
 
 			}
-			// DBエラーが生じた場合、エラー画面にフォワード
-
-		} catch (HrsmUcsDBException e) {
-			msg = MessageConstants.DB_ERR01;
-			request.setAttribute("errorMsg", msg);
-			path = Constants.error;
-
-			RequestDispatcher dispatcher = request.getRequestDispatcher(Constants.error);
-			dispatcher.forward(request, response);
-
 		}
 	}
 }
