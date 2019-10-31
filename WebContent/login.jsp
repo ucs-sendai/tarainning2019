@@ -8,7 +8,6 @@
  --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html>
@@ -30,14 +29,15 @@
         <td><input type="password" name="pass"></td>
     </tr>
     <tr>
-        <c:choose>
-            <c:when test="${not empty errorMsg}">
-                <td colspan="2" ><c:out value="(${errorMsg})" /></td>
-            </c:when>
-            <c:otherwise>
+     <!--  <c:choose>
+            <c:when test="${not empty errorMsg}">-->
+
+              <!-- <td colspan="2" > <c:out value="(${errorMsg})" /></td>-->
+         <!-- </c:when> -->
+          <!--  <c:otherwise>
                 <td colspan="2"><p></p></td>
             </c:otherwise>
-        </c:choose>
+        </c:choose> -->
     </tr>
     <tr>
         <td colspan="2" style="text-align:center"><input type="submit" value="ログイン"></td>

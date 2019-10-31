@@ -35,6 +35,88 @@ public class RegisterEmpServlet extends HttpServlet {
 		super();
 	}
 
+	public List<String> checkInputData(EmployeeBean empbean) {
+
+		// エラーメッセージリスト
+		List<String> errorMsgList = new ArrayList<>();
+
+		// 名前の入力チェック
+
+		byte[] bytes = empbean.getEmpName().getBytes();
+		if (empbean.getEmpName() == null) {
+
+			errorMsgList.add(MessageConstants.REGEMP_ERR01);
+
+		}
+		if (empbean.getEmpName().length() != bytes.length) {
+
+			// 60字以上か
+			if (empbean.getEmpName().length() != bytes.length || empbean.getEmpName().length() > 60) {
+				errorMsgList.add(MessageConstants.REGEMP_ERR06);
+			}
+
+			// ふりがなの入力チェック
+			if (empbean.getRuby() == null || empbean.getRuby().length() == 0) {
+
+				errorMsgList.add(MessageConstants.REGEMP_ERR02);
+
+			}
+			if (!empbean.getRuby().matches("^[\\u3040-\\u309F]+$")) {
+
+				errorMsgList.add(MessageConstants.REGEMP_ERR10);
+
+			}
+			if (empbean.getRuby().length() > 80) {
+
+				errorMsgList.add(MessageConstants.REGEMP_ERR07);
+			}
+
+			// 部門の入力チェック
+			if (empbean.getDept().getDeptId() == null || empbean.getDept().getDeptId().length() == 0) {
+
+				errorMsgList.add(MessageConstants.REGEMP_ERR03);
+
+				// パスワードの入力チェック
+				if (empbean.getPass() == null || empbean.getPass().length() == 0) {
+
+					errorMsgList.add(MessageConstants.REGEMP_ERR04);
+
+				} else if (empbean.getPass().length() < 8 || empbean.getPass().length() > 16) {
+
+					errorMsgList.add(MessageConstants.REGEMP_ERR08);
+
+				}
+
+				// 入社年月日の入力チェック
+				if (empbean.getEntryDate() == null || empbean.getEntryDate().length() == 0) {
+
+					errorMsgList.add(MessageConstants.REGEMP_ERR05);
+
+				}
+				if (empbean.getEntryDate().length() != 10) {
+
+					errorMsgList.add(MessageConstants.REGEMP_ERR09);
+
+				} else {
+
+				}
+				try {
+
+					DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+					df.setLenient(false);
+					df.parse(empbean.getEntryDate());
+
+					// フォーマット誤り
+				} catch (ParseException | java.text.ParseException e) {
+
+					errorMsgList.add(MessageConstants.REGEMP_ERR11);
+
+				}
+			}
+		}
+		return errorMsgList;
+	}
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -115,6 +197,9 @@ public class RegisterEmpServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		// エラーメッセージリスト
+		List<String> errorMsgList = new ArrayList<>();
+
 		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
 		String forwardPath = Constants.reg_confirm;
@@ -129,145 +214,27 @@ public class RegisterEmpServlet extends HttpServlet {
 		String entryDate = Normalizer.normalize(entryDateStr, Normalizer.Form.NFKC);
 		DeptBean dept = new DeptBean();
 
-		// エラーメッセージリスト
-		List<String> errorMsgList = new ArrayList<>();
+		// Employee型のインスタンスを生成、セッションスコープに保存
+		EmployeeBean registerEmp = new EmployeeBean(empId, empName, ruby, pass, entryDate, dept);
+		session.setAttribute("registerEmp", registerEmp);
 
-		// エラーメッセージを初期化
-		String errorMsg1 = "";
-		String errorMsg2 = "";
-		String errorMsg3 = "";
-		String errorMsg4 = "";
-		String errorMsg5 = "";
+		RegisterLogic registerLogic = new RegisterLogic();
+		errorMsgList = registerLogic.checkInputData(registerEmp);
 
-		// 名前の入力チェック
+		if (errorMsgList.isEmpty()) {
 
-		byte[] bytes = empName.getBytes();
-		if (empName == null || empName.length() == 0) {
+			forwardPath = Constants.reg_confirm;
+			RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
+			dispatcher.forward(request, response);
 
-			errorMsg1 = MessageConstants.REGEMP_ERR01;
-			errorMsgList.add(errorMsg1);
-			request.setAttribute("errorMsgList", errorMsgList);
-			empName = null;
+		} else {
+
+			forwardPath = Constants.register_form;
+			RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
+			dispatcher.forward(request, response);
+
 		}
-		if (empName.length() != bytes.length) {
-			// 全角で30字以上か
-			if (empName.length() > 30) {
-				errorMsg1 = MessageConstants.REGEMP_ERR06;
-				errorMsgList.add(errorMsg1);
-				request.setAttribute("errorMsgList", errorMsgList);
-				empName = null;
-			}
-			// 半角で60字以上か
-			if (empName.length() > 60) {
-				errorMsg1 = MessageConstants.REGEMP_ERR06;
-				errorMsgList.add(errorMsg1);
-				request.setAttribute("errorMsgList", errorMsgList);
-				empName = null;
-			}
 
-			// ふりがなの入力チェック
-			if (ruby == null || ruby.length() == 0) {
-
-				errorMsg2 = MessageConstants.REGEMP_ERR02;
-				errorMsgList.add(errorMsg2);
-				request.setAttribute("errorMsgList", errorMsgList);
-
-			}
-			if (!ruby.matches("^[\\u3040-\\u309F]+$")) {
-
-				errorMsg2 = MessageConstants.REGEMP_ERR10;
-				errorMsgList.add(errorMsg2);
-				request.setAttribute("errorMsgList", errorMsgList);
-
-			}
-			if (ruby.length() > 80) {
-
-				errorMsg2 = MessageConstants.REGEMP_ERR07;
-				errorMsgList.add(errorMsg2);
-				request.setAttribute("errorMsgList", errorMsgList);
-				ruby = null;
-
-			}
-
-			// 部門の入力チェック
-			if (deptId == null || deptId.length() == 0) {
-
-				errorMsg3 = MessageConstants.REGEMP_ERR03;
-				errorMsgList.add(errorMsg3);
-				request.setAttribute("errorMsgList", errorMsgList);
-
-				// 部門が選択されていればDept型インスタンスを生成
-			} else {
-
-				Map<String, String> deptMap = (Map<String, String>) session.getAttribute("deptMap");
-
-			}
-
-			// パスワードの入力チェック
-			if (pass == null || pass.length() == 0) {
-
-				errorMsg4 = MessageConstants.REGEMP_ERR04;
-				errorMsgList.add(errorMsg4);
-				request.setAttribute("errorMsgList", errorMsgList);
-
-			} else if (pass.length() < 8 || pass.length() > 16) {
-
-				errorMsg4 = MessageConstants.REGEMP_ERR08;
-				errorMsgList.add(errorMsg4);
-				request.setAttribute("errorMsgList", errorMsgList);
-				pass = null;
-
-			}
-
-			// 入社年月日の入力チェック
-			if (entryDate == null || entryDate.length() == 0) {
-
-				errorMsg5 = MessageConstants.REGEMP_ERR05;
-				errorMsgList.add(errorMsg5);
-				request.setAttribute("errorMsgList", errorMsgList);
-
-			} else if (entryDate.length() != 10) {
-
-				errorMsg5 = MessageConstants.REGEMP_ERR09;
-				errorMsgList.add(errorMsg5);
-				request.setAttribute("errorMsgList", errorMsgList);
-				entryDate = null;
-
-			} else {
-
-				try {
-
-					DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
-					df.setLenient(false);
-					df.parse(entryDate);
-
-					// フォーマット誤り
-				} catch (ParseException | java.text.ParseException e) {
-
-					errorMsg5 = MessageConstants.REGEMP_ERR11;
-					errorMsgList.add(errorMsg5);
-					request.setAttribute("errorMsg5", errorMsg5);
-
-				}
-
-				// Employee型のインスタンスを生成、セッションスコープに保存
-				EmployeeBean registerEmp = new EmployeeBean(empId, empName, ruby, pass, entryDate, dept);
-				session.setAttribute("registerEmp", registerEmp);
-
-				if (errorMsgList.isEmpty()) {
-
-					RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
-					dispatcher.forward(request, response);
-
-				} else {
-
-					forwardPath = Constants.reg_confirm;
-					RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
-					dispatcher.forward(request, response);
-
-				}
-
-			}
-		}
 	}
+
 }

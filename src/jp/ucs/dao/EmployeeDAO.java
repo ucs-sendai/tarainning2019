@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import jp.ucs.bean.DeptBean;
 import jp.ucs.bean.EmployeeBean;
 import jp.ucs.exception.HrsmUcsDBException;
 
@@ -38,8 +39,8 @@ public class EmployeeDAO extends BaseDAO {
 				String pass = rs.getString("pass");
 				String entryDate = rs.getString("entry_date");
 				String deptId = rs.getString("dept_id");
-				// String deptName = rs.getString("dept_name");
-				// DeptBean dept = new DeptBean(deptId,deptName);
+				String deptName = rs.getString("dept_name");
+				DeptBean dept = new DeptBean(deptId, deptName);
 				EmployeeBean employeeBean = new EmployeeBean(propertyId, serialId, empName, ruby, pass, entryDate);
 				empList.add(employeeBean);
 			}

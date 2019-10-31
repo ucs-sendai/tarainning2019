@@ -62,9 +62,9 @@ public class EmployeeBean {
 	 *
 	 * @param deptId:部門ID
 	 */
-	public EmployeeBean(String empId, String empName, String deptId, String pass, String entryDate) {
-		this.empId = empId;
+	public EmployeeBean(String empName, String ruby, String deptId, String pass, String entryDate) {
 		this.empName = empName;
+		this.ruby = ruby;
 		this.deptId = deptId;
 		this.pass = pass;
 		this.entryDate = entryDate;

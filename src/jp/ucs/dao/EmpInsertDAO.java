@@ -18,10 +18,11 @@ public class EmpInsertDAO extends BaseDAO {
 
 	/**
 	 * メソッド名:searchEmp 説明: 登録されている社員情報を検索する。
-	 * 
+	 *
 	 * @param: employeeBean
 	 * @return empId
 	 */
+
 	public String searchEmp(EmployeeBean empbean) throws HrsmUcsDBException {
 
 		// serialIDの初期値を設定
@@ -56,7 +57,7 @@ public class EmpInsertDAO extends BaseDAO {
 
 	/**
 	 * メソッド名:registerEmp 説明: 社員情報を追加する。
-	 * 
+	 *
 	 * @param: employeeBean
 	 * @return empId
 	 */
@@ -95,13 +96,13 @@ public class EmpInsertDAO extends BaseDAO {
 			int result = pStmt.executeUpdate();
 
 			if (result != 1) {
-				return false;
-			}
+				return result == 1;
 
+			}
 		} catch (SQLException e) {
 
 			e.printStackTrace();
-			return false;
+			throw new HrsmUcsDBException();
 		}
 		return true;
 
