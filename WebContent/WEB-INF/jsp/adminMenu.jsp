@@ -12,7 +12,7 @@
 <!DOCTYPE html >
 <html>
 <head>
-<link rel="stylesheet" style="text/css" href="/Hrsm/include.css"/>
+<link rel="stylesheet" style="text/css" href="/Hrsm/include.css" />
 <meta charset="UTF-8">
 <title>メニュー画面(管理者)</title>
 </head>
@@ -26,16 +26,13 @@
 					href="/Hrsm/Logout">ログアウト</a></td>
 			</tr>
 			<tr>
-				<td style="text-align: left">
-				    <a href="/Hrsm/EmpList">社員一覧</a><br>
-					<a href="/Hrsm/SearchMain">社員検索</a><br>
-					<a href="/Hrsm/RegisterEmp">社員登録</a><br>
-					<a href="/Hrsm/DeleteEmp">社員削除</a><br>
-				    <a href = "/Hrsm/ChangeStart">社員情報変更</a><br>
-					<a href = "/Hrsm/LicenseEntry">資格取得</a><br>
-					部門管理(工事中)<br>
-					資格管理(工事中)<br>
-				</td>
+				<td style="text-align: left"><a href="/Hrsm/EmpList">社員一覧</a><br>
+					<a href="/Hrsm/SearchMain">社員検索</a><br> <a
+					href="/Hrsm/RegisterEmp">社員登録</a><br> <a
+					href="/Hrsm/DeleteEmp">社員削除</a><br> <a
+					href="/Hrsm/ChangeStart">社員情報変更</a><br> <a
+					href="/Hrsm/LicenseEntry">資格取得</a><br> 部門管理(工事中)<br>
+					資格管理(工事中)<br></td>
 			</tr>
 		</table>
 	</form>

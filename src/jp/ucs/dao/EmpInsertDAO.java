@@ -97,7 +97,7 @@ public class EmpInsertDAO extends BaseDAO {
 
 			EmpInfo.setEmpId(empId);
 
-			// 登録出来たらEmpRegiを返す
+			// 登録出来たらEmpInfoを返す
 			return EmpInfo;
 		}
 

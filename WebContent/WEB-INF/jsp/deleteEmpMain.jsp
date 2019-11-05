@@ -15,13 +15,15 @@
 <link rel="stylesheet" style="text/css" href="/Hrsm/include.css">
 <link rel="stylesheet" style="text/css" href="/Hrsm/include404.css">
 <meta charset="UTF-8">
-<title>社員削除</title>
+<title>社員管理システム</title>
 </head>
 <body>
 	<jsp:include page="/title.jsp" />
 	<jsp:include page="/header.jsp" />
-	<h1>削除社員選択</h1>
-	<form action="/HrsmUcs/DeleteEmp" method="get">
+
+	<h1>社員削除</h1>
+
+	<form action="/Hrsm/DeleteEmp" method="post">
 		<table class="table0">
 			<tr>
 				<td><h3>社員ID</h3></td>
@@ -53,58 +55,19 @@
 				<td></td>
 			</tr>
 
-			<tr>
-				<td><h3>資格</h3></td>
-				<td>&emsp;<select style="width: 154px;" name="licenseId">
-						<option value=""></option>
-						<c:forEach var="license" items="${licenseMap}">
-							<c:choose>
-								<c:when
-									test="${searchCondition.license.licenseId == license.key}">
-									<option value="${license.key}" selected>${license.value}</option>
-								</c:when>
-								<c:otherwise>
-									<option value="${license.key}">${license.value}</option>
-								</c:otherwise>
-							</c:choose>
-						</c:forEach>
-				</select>
-				</td>
-				<td></td>
-			</tr>
+
 		</table>
-		<pre>　　　　　　　　　　　　　　　　　　　　<input type="submit" value="検索"></pre>
-		<input type="hidden" name="action" value="searched">
+		<pre>
+			<input type="submit" value="削除">
+		</pre>
+		<%--
+		<input type="submit" name="action" value="searched">
+		 --%>
 	</form>
 
 	${message}
 
-	<c:if test="${not empty searchResultList }">
-		<form name="chBox" action="/Hrsm/DeleteEmp" method="post">
-			<div class="table1Div"><table class="table1">
-				<tr>
-					<th>削除</th>
-					<th>社員ID</th>
-					<th>氏名</th>
-					<th>部門</th>
-				</tr>
 
-				<c:forEach var="searchResult" items="${searchResultList}">
-					<tr>
-						<td><input type="checkBox" name="emp"
-							value="${searchResult.empId}"></td>
-						<td>${searchResult.empId}</td>
-						<td>${searchResult.empName}</td>
-						<td>${searchResult.dept.deptName}</td>
-					</tr>
-				</c:forEach>
-			</table>
-			</div>
-			<div>
-			<pre>　　　　　　　　　　　　　　　　　　　　<input type="submit" value="削除"></pre>
-			</div>
-		</form>
-	</c:if>
 	<jsp:include page="/footer.jsp" />
 </body>
 </html>

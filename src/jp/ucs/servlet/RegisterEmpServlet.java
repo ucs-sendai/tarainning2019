@@ -117,7 +117,6 @@ public class RegisterEmpServlet extends HttpServlet {
 
 		// EmployeeBean型のインスタンスを作成し、sessionスコープに登録
 		DeptBean dept = new DeptBean(deptId, "");
-
 		EmployeeBean registerEmp = new EmployeeBean(empName, ruby, dept, pass, entryDate);
 
 		// logicクラスのインスタンスを生成
@@ -127,7 +126,7 @@ public class RegisterEmpServlet extends HttpServlet {
 		errorMsg = logic.checkEmp(registerEmp);
 
 		// 入力項目にエラーが生じたらエラーメッセージを表示
-		if (errorMsg.isEmpty() == false) {
+		if (errorMsg.size() > 0) {
 
 			// エラーメッセージをリクエストスコープに保存する
 			request.setAttribute("errorMsg", errorMsg);

@@ -1,5 +1,7 @@
 package jp.ucs.logic;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import jp.ucs.bean.EmployeeBean;
@@ -41,29 +43,70 @@ public class RegisterLogic {
 	}
 
 	// 入力チェック
-	public ArrayList checkEmp(EmployeeBean EmpList) {
+	public ArrayList<String> checkEmp(EmployeeBean EmpList) {
 
 		ArrayList<String> arrayList = new ArrayList<String>();
 
 		// 受け取った値の入力チェック
-		if (EmpList.getEmpName().equals("") || EmpList.getEmpName().length() > 30) {
+		// 名前が未入力
+		if (EmpList.getEmpName().equals("")) {
 			arrayList.add(MessageConstants.REGEMP_ERR01);
 		}
 
-		if ((EmpList.getRuby().equals("") || EmpList.getRuby().length() > 40)) {
+		// 名前:入力制限値超え
+		if (EmpList.getEmpName().length() > 30) {
+			arrayList.add(MessageConstants.REGEMP_ERR06);
+		}
+
+		// ふりがな:未入力
+		if (EmpList.getRuby().equals("")) {
 			arrayList.add(MessageConstants.REGEMP_ERR02);
 		}
 
+		// ふりがな:入力制限値超え
+		if (EmpList.getRuby().length() > 40) {
+			arrayList.add(MessageConstants.REGEMP_ERR07);
+		}
+
+		// ふりがな:ひらがな判定
+		if (!(EmpList.getRuby().matches("^[\\u3040-\\u309F]+$"))) {
+			arrayList.add(MessageConstants.REGEMP_ERR10);
+		}
+
+		// 部門 : 未選択
 		if (EmpList.getDept().getDeptId().equals("null")) {
 			arrayList.add(MessageConstants.REGEMP_ERR03);
 		}
 
-		if (EmpList.getPass().equals("") || EmpList.getPass().length() > 16 || EmpList.getPass().length() < 8) {
+		// PASS : 未入力
+		if (EmpList.getPass().equals("")) {
 			arrayList.add(MessageConstants.REGEMP_ERR04);
 		}
 
-		if (EmpList.getEntryDate().equals("") || EmpList.getEntryDate().length() != 10) {
+		// PASS : 入力制限値超え
+		// PASS : 入力制限値未満
+		if (EmpList.getPass().length() < 8 || EmpList.getPass().length() > 16) {
+			arrayList.add(MessageConstants.REGEMP_ERR08);
+		}
+
+		// 入社年月日 : 未入力
+		if (EmpList.getEntryDate().equals("")) {
 			arrayList.add(MessageConstants.REGEMP_ERR05);
+		}
+
+		// 入社年月日 : 規定値ではない
+		if (EmpList.getEntryDate().length() != 10) {
+			arrayList.add(MessageConstants.REGEMP_ERR09);
+		}
+
+		// 入社年月日 : 無効な年
+		DateFormat format = new SimpleDateFormat(EmpList.getEntryDate());
+		try {
+			format.setLenient(false);
+			format.parse(EmpList.getEntryDate());
+
+		} catch (Exception e) {
+			arrayList.add(MessageConstants.REGEMP_ERR11);
 		}
 
 		return arrayList;
