@@ -19,29 +19,24 @@
 <title>社員削除</title>
 </head>
 <body>
-	<h1>削除社員確認</h1>
-	<h3>以下の社員を削除しますか?</h3>
-	<div class="table1Div"><table class="table1">
-		<tr>
-			<th>社員ID</th>
-			<th>氏名</th>
-			<th>部門</th>
-		</tr>
+	<h1>社員削除完了</h1>
+	<h3>以下の社員を削除しました</h3>
+	<div class="table1Div">
+		<table class="table1">
 			<tr>
-			<th>00192818</th>
-			<th>小西香菜子</th>
-			<th>仙台事業所</th>
-		</tr>
-		<c:forEach var="delete" items="${deleteEmpList }">
+				<th>社員ID</th>
+				<th>氏名</th>
+				<th>部門</th>
 			<tr>
-				<td><c:out value="${delete.empId}" /></td>
-				<td><c:out value="${delete.empName}" /></td>
-				<td><c:out value="${delete.dept.deptName}" /></td>
+				<td><c:out value="${deleteEmp.empId}" /></td>
+				<td><c:out value="${deleteEmp.empName}" /></td>
+				<td><c:out value="${deleteEmp.dept.deptName}" /></td>
 			</tr>
-		</c:forEach>
-	</table>
-	<a href="/Hrsm/EntryMenu">いいえ</a>
-	<a href="/Hrsm/DeleteEmp">はい</a>
+		</table>
+		<%--
+		<a href="/Hrsm/EntryMenu">いいえ</a> <a href="/Hrsm/DeleteEmp">はい</a>
+		--%>
+		<a href="/Hrsm/DeleteEmp">戻る</a>
 	</div>
 	<jsp:include page="/footer.jsp"></jsp:include>
 </body>

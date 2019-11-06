@@ -8,13 +8,19 @@
  --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.util.*"%>
+<%@ page import="jp.ucs.bean.DeptBean"%>
+
 <!DOCTYPE html>
 <html>
 <head>
+
 <link rel="stylesheet" style="text/css" href="/Hrsm/include.css">
 <link rel="stylesheet" style="text/css" href="/Hrsm/include404.css">
 <meta charset="UTF-8">
+
 <title>社員管理システム</title>
 </head>
 <body>
@@ -25,20 +31,21 @@
 
 	<form action="/Hrsm/DeleteEmp" method="post">
 		<table class="table0">
+
 			<tr>
 				<td><h3>社員ID</h3></td>
-				<td>&emsp;<input type="text" name="empId"
+				<td><input type="text" name="empId"
 					value="${searchCondition.empId}"></td>
 			</tr>
 
 			<tr>
 				<td><h3>氏名</h3></td>
-				<td>&emsp;<input type="text" name="empName"
+				<td><input type="text" name="empName"
 					value="${searchCondition.empName}"></td>
 			</tr>
 			<tr>
 				<td><h3>部門</h3></td>
-				<td>&emsp;<select style="width: 154px;" name="deptId">
+				<td><select style="width: 154px;" name="deptId">
 						<option value="1"></option>
 						<c:forEach var="dept" items="${deptMap}">
 							<c:choose>
