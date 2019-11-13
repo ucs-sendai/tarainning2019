@@ -13,12 +13,12 @@ public class LoginLogic {
 
 	/**
 	 * メソッド名:loginExecute 説明: 管理者のログイン処理を行う。
-	 * 
+	 *
 	 * @param: employeeBean
 	 * @return employeeDAO.findByEmployee(employeeBean)
 	 */
 
-	public boolean loginCheck(EmployeeBean empInfo) throws HrsmUcsDBException {
+	public EmployeeBean loginCheck(EmployeeBean empInfo) throws HrsmUcsDBException {
 
 		// daoクラスの初期化
 		EmployeeDAO dao = new EmployeeDAO();
@@ -28,7 +28,7 @@ public class LoginLogic {
 
 		// 社員情報があればtrueを返す
 		// 社員情報がnullだったらfalseを返す
-		return rsltEmpInfo.getPropertyId() != null;
-
+		// return rsltEmpInfo.getPropertyId() != null;
+		return rsltEmpInfo;
 	}
 }

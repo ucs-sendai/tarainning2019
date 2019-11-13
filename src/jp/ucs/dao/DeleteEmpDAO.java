@@ -67,9 +67,19 @@ public class DeleteEmpDAO extends BaseDAO {
 			sb.append("' and ");
 			sb.append("serial_id = '");
 			sb.append(EmpInfo.getSerialId());
-			sb.append("' and ");
-			sb.append("dept_id = '");
-			sb.append(EmpInfo.getDept().getDeptId());
+
+			if (EmpInfo.getEmpName().length() > 0) {
+				sb.append("' and ");
+				sb.append("emp_name = '");
+				sb.append(EmpInfo.getEmpName());
+			}
+
+			if (EmpInfo.getDept().getDeptId().length() > 1) {
+				sb.append("' and ");
+				sb.append("dept_id = '");
+				sb.append(EmpInfo.getDept().getDeptId());
+			}
+
 			sb.append("' ; ");
 
 			// delete文の実行

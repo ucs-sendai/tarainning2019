@@ -137,47 +137,48 @@ public class deleteEmpServlet extends HttpServlet {
 		errorMsg = deleteLogic.checkEmp(deleteEmp);
 
 		// 入力項目にエラーが生じたらエラーメッセージを表示
-		if (errorMsg.size() > 0) {
+		// if (errorMsg.size() > 0) {
 
-			// エラーメッセージをリクエストスコープに保存する
-			request.setAttribute("message", errorMsg);
+		// エラーメッセージをリクエストスコープに保存する
+		// request.setAttribute("message", errorMsg);
 
-			// エラーメッセージを表示
-			RequestDispatcher dispatcher = request.getRequestDispatcher(Constants.delete_emp_main);
-			dispatcher.forward(request, response);
+		// エラーメッセージを表示
+		// RequestDispatcher dispatcher =
+		// request.getRequestDispatcher(Constants.delete_emp_main);
+		// dispatcher.forward(request, response);
 
-		} else {
+		// } else {
 
-			HttpSession session = request.getSession();
-			session.setAttribute("deleteEmp", deleteEmp);
+		HttpSession session = request.getSession();
+		session.setAttribute("deleteEmp", deleteEmp);
 
-			// 削除処理を実行
-			try {
-				boolean resultEmp = deleteLogic.deleteExecute(deleteEmp);
+		// 削除処理を実行
+		try {
+			boolean resultEmp = deleteLogic.deleteExecute(deleteEmp);
 
-				if (resultEmp) {
+			if (resultEmp) {
 
-					// deleteEmpConfirm.jspにフォワード
-					RequestDispatcher dispatcher = request.getRequestDispatcher(Constants.delete_emp_confirm);
-					dispatcher.forward(request, response);
+				// deleteEmpConfirm.jspにフォワード
+				RequestDispatcher dispatcher = request.getRequestDispatcher(Constants.delete_emp_confirm);
+				dispatcher.forward(request, response);
 
-				} else {
+			} else {
 
-					// sessionスコープ内のdeleteEmpを削除
-					session.removeAttribute("deleteEmp");
+				// sessionスコープ内のdeleteEmpを削除
+				session.removeAttribute("deleteEmp");
 
-					RequestDispatcher dispatcher = request.getRequestDispatcher(Constants.delete_emp_main);
-					dispatcher.forward(request, response);
-				}
-
-				// HrmsUcsDBExceptionがスローされたらキャッチしてdbError.jspにフォワード
-			} catch (HrsmUcsDBException e) {
-				msg = MessageConstants.DB_ERR01;
-				request.setAttribute("errorMsg", MessageConstants.DB_ERR01);
-
-				RequestDispatcher dispatcher = request.getRequestDispatcher(Constants.error);
+				RequestDispatcher dispatcher = request.getRequestDispatcher(Constants.delete_emp_main);
 				dispatcher.forward(request, response);
 			}
+
+			// HrmsUcsDBExceptionがスローされたらキャッチしてdbError.jspにフォワード
+		} catch (HrsmUcsDBException e) {
+			msg = MessageConstants.DB_ERR01;
+			request.setAttribute("errorMsg", MessageConstants.DB_ERR01);
+
+			RequestDispatcher dispatcher = request.getRequestDispatcher(Constants.error);
+			dispatcher.forward(request, response);
 		}
 	}
+	// }
 }

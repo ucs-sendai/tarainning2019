@@ -17,11 +17,7 @@ import jp.ucs.exception.HrsmUcsDBException;
 import jp.ucs.logic.LoginLogic;
 
 /**
- * システム名：社員管理システム
- * クラス名  ：EntryMenu
- * 処理概要  ：ログイン処理
- * プロジェクト名：HrsmUcs(ログイン画面)
- * 作成者    ：高原 優
+ * システム名：社員管理システム クラス名 ：EntryMenu 処理概要 ：ログイン処理 プロジェクト名：HrsmUcs(ログイン画面) 作成者 ：高原 優
  * 作成日付：2019/07/08(月)
  */
 
@@ -29,99 +25,94 @@ import jp.ucs.logic.LoginLogic;
 public class EntryMenuServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	//topリンクから管理者か一般のメニューに戻る
+	// topリンクから管理者か一般のメニューに戻る
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		HttpSession session = request.getSession();
 		EmployeeBean employee = (EmployeeBean) session.getAttribute("employee");
 
-		if(employee.getPropertyId().equals("0000")){
-			RequestDispatcher dispatcher =
-					request.getRequestDispatcher(Constants.admin);
-			dispatcher.forward(request,response);
-		}else{
-			RequestDispatcher dispatcher =
-					request.getRequestDispatcher(Constants.general);
-			dispatcher.forward(request,response);
+		if (employee.getPropertyId().equals("0000")) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher(Constants.admin);
+			dispatcher.forward(request, response);
+		} else {
+			RequestDispatcher dispatcher = request.getRequestDispatcher(Constants.general);
+			dispatcher.forward(request, response);
 		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		//JSPからIDとパスワードを受け取る
+		// JSPからIDとパスワードを受け取る
 		request.setCharacterEncoding("UTF-8");
 		String empId = request.getParameter("emp_id");
 		String pass = request.getParameter("pass");
 
-		//初期化
+		// 初期化
 		String msg = "";
 		String path = "";
 
 		if (empId.equals("") || pass.equals("") || empId.length() != 8) {
 			msg = MessageConstants.LOGIN_ERR;
-			request.setAttribute("errorMsg",msg);
+			request.setAttribute("errorMsg", msg);
 			path = Constants.login;
 
 		}
 
-		//取得したempIdをpropertyIdとserialIdに分ける
-		String propertyId = empId.substring(0,4);
-		String serialId = empId.substring(4,8);
+		// 取得したempIdをpropertyIdとserialIdに分ける
+		String propertyId = empId.substring(0, 4);
+		String serialId = empId.substring(4, 8);
 
-		//EmployeeBean型のインスタンスを作成し、それを引数にLoginLogicを実行(BO)
-		EmployeeBean employee = new EmployeeBean(propertyId,serialId,pass);
+		// EmployeeBean型のインスタンスを作成し、それを引数にLoginLogicを実行(BO)
+		EmployeeBean employee = new EmployeeBean(propertyId, serialId, pass);
 
-		//Logicクラスのインスタンスの生成
+		// Logicクラスのインスタンスの生成
 		LoginLogic loginLogic = new LoginLogic();
 
-		try{
-			boolean result = loginLogic.loginCheck(employee);
+		try {
+			EmployeeBean result = new EmployeeBean();
+			result = loginLogic.loginCheck(employee);
 
-			//ログイン認証が成功したしたとき、sessionスコープに社員情報を加える
-			if(result){
+			// ログイン認証が成功したしたとき、sessionスコープに社員情報を加える
+			if (result != null) {
 				HttpSession session = request.getSession();
-				session.setAttribute("employee", employee);
-				//propertyが"0000"の場合、管理者メニューにフォワード
-				if(propertyId.equals("0000")){
+				session.setAttribute("employee", result);
+				// propertyが"0000"の場合、管理者メニューにフォワード
+				if (propertyId.equals("0000")) {
 					path = Constants.admin;
 
-					RequestDispatcher dispatcher =
-							request.getRequestDispatcher(path);
-					dispatcher.forward(request,response);
+					RequestDispatcher dispatcher = request.getRequestDispatcher(path);
+					dispatcher.forward(request, response);
 				}
 
-				//resultがtrueでpropertyIdが"0000"でない場合、一般メニューにフォワード
-			}else if( !(propertyId).equals("0000")){
+				// resultがtrueでpropertyIdが"0000"でない場合、一般メニューにフォワード
+			} else if (!(propertyId).equals("0000")) {
 				path = Constants.general;
 
-				RequestDispatcher dispatcher =
-						request.getRequestDispatcher(path);
-				dispatcher.forward(request,response);
+				RequestDispatcher dispatcher = request.getRequestDispatcher(path);
+				dispatcher.forward(request, response);
 
-				//ログイン認証が成功しなかった場合、login.jspにフォワード
+				// ログイン認証が成功しなかった場合、login.jspにフォワード
 
-			}else{
+			} else {
 				msg = MessageConstants.LOGIN_ERR;
-				request.setAttribute("errorMsg",msg);
+				request.setAttribute("errorMsg", msg);
 				path = Constants.login;
 
-				RequestDispatcher dispatcher =
-						request.getRequestDispatcher(path);
-				dispatcher.forward(request,response);
+				RequestDispatcher dispatcher = request.getRequestDispatcher(path);
+				dispatcher.forward(request, response);
 			}
 
-			//DBエラーが生じた場合、エラー画面にフォワード
-		} catch(HrsmUcsDBException e) {
+			// DBエラーが生じた場合、エラー画面にフォワード
+		} catch (HrsmUcsDBException e) {
 			msg = MessageConstants.DB_ERR01;
-			request.setAttribute("errorMsg",msg);
-			path =Constants.error;
+			request.setAttribute("errorMsg", msg);
+			path = Constants.error;
 
-			RequestDispatcher dispatcher =
-					request.getRequestDispatcher(path);
-			dispatcher.forward(request,response);
-		} 
+			RequestDispatcher dispatcher = request.getRequestDispatcher(path);
+			dispatcher.forward(request, response);
+		}
 
 	}
 }

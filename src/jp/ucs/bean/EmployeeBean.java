@@ -101,6 +101,27 @@ public class EmployeeBean {
 	}
 
 	/**
+	 * 引数6つのコンストラクタ
+	 * 
+	 * @param id
+	 *            :社員ID
+	 * @param name:社員名前
+	 * @param ruby:社員の名前のふりがな
+	 * @param pass:パスワード
+	 * @param dept:部門ID
+	 * @param entryDate:入社年月日
+	 */
+
+	public EmployeeBean(String empId, String empName, String ruby, DeptBean dept, String pass, String entryDate) {
+		this.empId = empId;
+		this.empName = empName;
+		this.ruby = ruby;
+		this.dept = dept;
+		this.pass = pass;
+		this.entryDate = entryDate;
+	}
+
+	/**
 	 * 引数7つのコンストラクタ
 	 * 
 	 * @param propertyId:社員IDの上4桁

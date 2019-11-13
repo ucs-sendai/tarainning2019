@@ -25,11 +25,14 @@
 
 			<tr>
 				<td>社員ID</td>
-				<td><c:out value="${afterEmp.empId}" /></td>
+				<td><c:out value="${beforeEmp.empId}" /></td>
 			</tr>
 			<tr>
 				<td>氏名</td>
-				<td><input type="text" name="name" value="${afterEmp.empName}"></td>
+				<%-- <td><c:out value="${beforeEmp.empName}" /></td> --%>
+				<td><input type="text" name="name" value="${beforeEmp.empName}"></td>
+
+				<%--
 				<c:choose>
 					<c:when test="${ not empty errorMsgMap.name}">
 						<tr>
@@ -39,10 +42,12 @@
 						</tr>
 					</c:when>
 				</c:choose>
+				--%>
 			</tr>
 			<tr>
 				<td>ふりがな</td>
-				<td><input type="text" name="ruby" value="${afterEmp.ruby}"></td>
+				<td><input type="text" name="ruby" value="${beforeEmp.ruby}"></td>
+				<%--
 				<c:choose>
 					<c:when test="${ not empty errorMsgMap.ruby}">
 						<tr>
@@ -52,11 +57,21 @@
 						</tr>
 					</c:when>
 				</c:choose>
+				--%>
 			</tr>
 			<tr>
 			<tr>
 				<th>部門</th>
+				<td><select name="dept" size="1">
+						<option value="""selected">${beforeEmp.dept.deptName}</option>
+						<c:forEach var="dept" items="${deptMap}">
+							<option value="${dept.key}">${dept.value}</option>
+						</c:forEach>
+				</select></td>
+			</tr>
 
+
+			<%--
 				<td><select name="dept" size="1">
 						<option value="null"></option>
 						<option value="zaimu">管理本部経理財務</option>
@@ -71,17 +86,19 @@
 							<option value="${dept.key}">${dept.value}</option>
 						</c:forEach>
 				</select></td>
+--%>
 			</tr>
-			<c:forEach var="dept" items="${deptMap}">
-				<option value="${dept.key}">${dept.value}</option>
-			</c:forEach>
 
-
-
+			<%--
+				<c:forEach var="dept" items="${deptMap}">
+					<option value="${dept.key}">${dept.value}</option>
+				</c:forEach>
+				--%>
 			<tr>
 				<td>パスワード</td>
 				<td><input type="password" style="width: 144px;" name="pass"
-					value="${afterEmp.pass}"></td>
+					value="${beforeEmp.pass}"></td>
+				<%--
 				<c:choose>
 					<c:when test="${ not empty errorMsgMap.pass}">
 						<tr>
@@ -91,11 +108,13 @@
 						</tr>
 					</c:when>
 				</c:choose>
+				--%>
 			</tr>
 			<tr>
 				<td>入社年月日</td>
 				<td><input type="text" name="date"
-					value="${afterEmp.entryDate}"></td>
+					value="${beforeEmp.entryDate}"></td>
+				<%--
 				<c:choose>
 					<c:when test="${ not empty errorMsgMap.date}">
 						<tr>
@@ -105,12 +124,26 @@
 						</tr>
 					</c:when>
 				</c:choose>
+				--%>
 			</tr>
 
 
 		</table>
-		<input type="submit" value="登録">
+		<input type="submit" value="変更">
+
+		<%-- <a href="/Hrsm/Entry?action=yes">変更</a> --%>
+
+		<%-- <p><a href="/Hrsm/ChangeComp">変更</a></p>
+		<form action="yes" method="get"></form> --%>
 	</form>
+	<c:forEach var="message" items="${message}">
+		<p style="text-align: left">
+			<font color="#EE0000">(${message})</font>
+		</p>
+	</c:forEach>
+	<%--
+	${message}
+--%>
 	<jsp:include page="/footer.jsp" />
 </body>
 </html>
