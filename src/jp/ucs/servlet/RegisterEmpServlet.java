@@ -125,6 +125,12 @@ public class RegisterEmpServlet extends HttpServlet {
 		// 入力項目の不備チェック
 		errorMsg = logic.checkEmp(registerEmp);
 
+		// 入力項目の日付チェック
+		if (logic.checkDate(registerEmp.getEntryDate()) == false) {
+
+			errorMsg.add((MessageConstants.REGEMP_ERR11));
+		}
+
 		// 入力項目にエラーが生じたらエラーメッセージを表示
 		if (errorMsg.size() > 0) {
 
@@ -134,7 +140,6 @@ public class RegisterEmpServlet extends HttpServlet {
 			// エラーメッセージを表示
 			RequestDispatcher dispatcher = request.getRequestDispatcher(Constants.register_form);
 			dispatcher.forward(request, response);
-
 		} else {
 
 			HttpSession session = request.getSession();

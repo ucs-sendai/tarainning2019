@@ -29,6 +29,8 @@ public class LoginLogic {
 		// 社員情報があればtrueを返す
 		// 社員情報がnullだったらfalseを返す
 		// return rsltEmpInfo.getPropertyId() != null;
+
+		rsltEmpInfo.setEmpId(rsltEmpInfo.getPropertyId() + rsltEmpInfo.getSerialId());
 		return rsltEmpInfo;
 	}
 }

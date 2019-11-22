@@ -1,7 +1,6 @@
 package jp.ucs.logic;
 
 import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import jp.ucs.bean.EmployeeBean;
@@ -69,7 +68,7 @@ public class RegisterLogic {
 		}
 
 		// ふりがな:ひらがな判定
-		if (!(EmpList.getRuby().matches("^[\\u3040-\\u309F]+$"))) {
+		if (!(EmpList.getRuby().matches("^[\\u3040-\\u309F]+$")) && !(EmpList.getRuby().equals(""))) {
 			arrayList.add(MessageConstants.REGEMP_ERR10);
 		}
 
@@ -85,7 +84,7 @@ public class RegisterLogic {
 
 		// PASS : 入力制限値超え
 		// PASS : 入力制限値未満
-		if (EmpList.getPass().length() < 8 || EmpList.getPass().length() > 16) {
+		else if (EmpList.getPass().length() < 8 || EmpList.getPass().length() > 16) {
 			arrayList.add(MessageConstants.REGEMP_ERR08);
 		}
 
@@ -95,20 +94,25 @@ public class RegisterLogic {
 		}
 
 		// 入社年月日 : 規定値ではない
-		if (EmpList.getEntryDate().length() != 10) {
+		else if (EmpList.getEntryDate().length() != 10) {
 			arrayList.add(MessageConstants.REGEMP_ERR09);
-		}
-
-		// 入社年月日 : 無効な年
-		DateFormat format = new SimpleDateFormat(EmpList.getEntryDate());
-		try {
-			format.setLenient(false);
-			format.parse(EmpList.getEntryDate());
-
-		} catch (Exception e) {
-			arrayList.add(MessageConstants.REGEMP_ERR11);
 		}
 
 		return arrayList;
 	}
+
+	public boolean checkDate(String strDate) {
+
+		DateFormat format = DateFormat.getDateInstance();
+		format.setLenient(false);
+
+		try {
+			format.parse(strDate);
+			return true;
+
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
 }

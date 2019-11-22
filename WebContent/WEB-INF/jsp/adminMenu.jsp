@@ -31,7 +31,7 @@
 					href="/Hrsm/RegisterEmp">社員登録</a><br> <a
 					href="/Hrsm/DeleteEmp">社員削除</a><br> <a
 					href="/Hrsm/ChangeStart">社員情報変更</a><br> <a
-					href="/Hrsm/LicenseEntry">資格取得</a><br> 部門管理(工事中)<br>
+					href="/Hrsm/RegisterLicense">資格登録</a><br> 部門管理(工事中)<br>
 					資格管理(工事中)<br></td>
 			</tr>
 		</table>

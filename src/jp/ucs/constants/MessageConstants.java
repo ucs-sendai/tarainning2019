@@ -10,7 +10,7 @@ package jp.ucs.constants;
 
 public class MessageConstants {
 
-	//1-10
+	// 1-10
 	public static final String LOGIN_ERR = "社員IDもしくはパスワードが正しくありません";
 	public static final String DELEMP_MSG01 = "削除する社員を選択してください";
 	public static final String DELEMP_MSG02 = "該当する社員が見当たりません";
@@ -21,7 +21,7 @@ public class MessageConstants {
 	public static final String REGEMP_ERR01 = "氏名が入力されていません";
 	public static final String REGEMP_ERR02 = "ふりがなが入力されていません";
 	public static final String REGEMP_ERR03 = "部門が選択されていません";
-	//11-20
+	// 11-20
 	public static final String REGEMP_ERR04 = "パスワードが入力されていません";
 	public static final String REGEMP_ERR05 = "入社年月日が入力されていません";
 	public static final String CHANGE_MSG01 = "社員情報を変更しますか?";
@@ -33,6 +33,8 @@ public class MessageConstants {
 	public static final String REGEMP_ERR08 = "パスワードは半角8字～16字で入力してください";
 	public static final String REGEMP_ERR09 = "入社年月日は半角10字で入力してください";
 
+	// 20-
 	public static final String REGEMP_ERR10 = "ひらがなで入力してください";
 	public static final String REGEMP_ERR11 = "有効な年月日ではありません";
+	public static final String LICENS_ERR12 = "資格が選ばれていません";
 }

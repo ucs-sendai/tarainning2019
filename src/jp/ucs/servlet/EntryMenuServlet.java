@@ -58,6 +58,9 @@ public class EntryMenuServlet extends HttpServlet {
 			request.setAttribute("errorMsg", msg);
 			path = Constants.login;
 
+			RequestDispatcher dispatcher = request.getRequestDispatcher(path);
+			dispatcher.forward(request, response);
+
 		}
 
 		// 取得したempIdをpropertyIdとserialIdに分ける
@@ -75,9 +78,12 @@ public class EntryMenuServlet extends HttpServlet {
 			result = loginLogic.loginCheck(employee);
 
 			// ログイン認証が成功したしたとき、sessionスコープに社員情報を加える
-			if (result != null) {
+			// if (!(result.getEmpId().equals("null") ||
+			// result.getPass().equals("null"))) {
+			if (result.getPropertyId() != null || result.getPass() != null) {
 				HttpSession session = request.getSession();
 				session.setAttribute("employee", result);
+
 				// propertyが"0000"の場合、管理者メニューにフォワード
 				if (propertyId.equals("0000")) {
 					path = Constants.admin;
@@ -87,7 +93,8 @@ public class EntryMenuServlet extends HttpServlet {
 				}
 
 				// resultがtrueでpropertyIdが"0000"でない場合、一般メニューにフォワード
-			} else if (!(propertyId).equals("0000")) {
+			}
+			if (!(propertyId).equals("0000")) {
 				path = Constants.general;
 
 				RequestDispatcher dispatcher = request.getRequestDispatcher(path);
